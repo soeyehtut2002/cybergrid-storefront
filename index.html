@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CYBERGRID // Next-Gen Sci-Fi & Cyberpunk Gaming Storefront</title>
+  <meta name="description" content="Discover, explore, and download premium Cyberpunk and Sci-Fi games on CYBERGRID. High performance gaming hub with instant downloads and exclusive deals.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background Ambient Effects -->
+  <div class="cyber-bg-glow"></div>
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- Announcement Ticker -->
+  <div class="announcement-bar">
+    <div class="announcement-content">
+      <span><i class="fa-solid fa-bolt text-cyan"></i> CYBER SUMMER SALE IS LIVE: GET UP TO 75% OFF SELECT TITLES</span>
+      <span class="badge-promo">USE CODE: <strong id="copy-code-btn" title="Click to copy promo code">CYBER2099</strong></span>
+      <span><i class="fa-solid fa-gamepad text-magenta"></i> 24 NEW SCI-FI RELEASES ADDED THIS WEEK</span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-vr-cardboard"></i>
+        </div>
+        <div class="logo-text">
+          <span class="logo-main">CYBER<span class="text-cyan">GRID</span></span>
+          <span class="logo-sub">GAMING // NEXUS</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#store" class="nav-link"><i class="fa-solid fa-store"></i> Store Catalog</a>
+        <a href="#deals" class="nav-link"><i class="fa-solid fa-tags"></i> Cyber Deals</a>
+        <a href="#community" class="nav-link"><i class="fa-solid fa-users"></i> Community</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Search trigger -->
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="global-search-input" placeholder="Search games, tags, platforms..." autocomplete="off">
+          <button class="clear-search-btn" id="clear-search" hidden><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Wishlist Button -->
+        <button class="icon-btn" id="wishlist-btn" title="View Wishlist">
+          <i class="fa-solid fa-heart"></i>
+          <span class="badge" id="wishlist-count">0</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button class="icon-btn cart-trigger-btn" id="cart-btn" title="View Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="badge badge-magenta" id="cart-count">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-backdrop">
+      <img id="hero-img" src="assets/cyber_banner.jpg" alt="Cyberpunk City Banner" class="hero-bg-img">
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fa-solid fa-fire text-magenta"></i> FEATURED TITLE OF THE MONTH
+        </div>
+        <h1 class="hero-title">NEON OVERDRIVE <span class="glow-text">2099</span></h1>
+        <p class="hero-description">
+          Step into Neo-Kyoto as an augmented Netrunner. Hack quantum networks, engage in intense high-frequency katana combat, and dismantle the ruling megacorporations.
+        </p>
+
+        <div class="hero-meta">
+          <span class="meta-tag"><i class="fa-solid fa-star text-yellow"></i> 4.9 / 5.0</span>
+          <span class="meta-tag"><i class="fa-solid fa-laptop-code"></i> Action RPG</span>
+          <span class="meta-tag"><i class="fa-solid fa-desktop"></i> PC / PS5 / Xbox</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="hero-buy-btn">
+            <i class="fa-solid fa-cart-plus"></i> BUY NOW - $49.99 <span class="old-price">$69.99</span>
+          </button>
+          <button class="btn btn-secondary" id="hero-quick-btn">
+            <i class="fa-solid fa-circle-info"></i> QUICK VIEW
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num text-cyan">142K+</div>
+          <div class="stat-label">Active Cyber Runners</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num text-magenta">99.8%</div>
+          <div class="stat-label">Positive Ratings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num text-yellow">24/7</div>
+          <div class="stat-label">Instant Cloud Delivery</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Section -->
+  <section class="store-section" id="store">
+    <div class="section-container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">CYBERSTORE <span class="text-cyan">CATALOG</span></h2>
+          <p class="section-subtitle">Explore cutting-edge sci-fi titles, immersive RPGs, and tactical simulators.</p>
+        </div>
+
+        <div class="sort-wrapper">
+          <label for="sort-select"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort By:</label>
+          <select id="sort-select" class="cyber-select">
+            <option value="featured">Featured / Popular</option>
+            <option value="rating">Highest Rated</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="title">Alphabetical (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filter Controls Bar -->
+      <div class="filter-bar">
+        <div class="filter-group">
+          <span class="filter-label"><i class="fa-solid fa-filter"></i> Category:</span>
+          <div class="filter-pills" id="category-filters">
+            <button class="pill-btn active" data-category="all">All Games</button>
+            <button class="pill-btn" data-category="Action RPG">Action RPG</button>
+            <button class="pill-btn" data-category="Sci-Fi Sim">Sci-Fi Sim</button>
+            <button class="pill-btn" data-category="Cyberpunk Thriller">Cyber Thriller</button>
+            <button class="pill-btn" data-category="FPS Tactics">FPS Tactics</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label"><i class="fa-solid fa-display"></i> Platform:</span>
+          <div class="filter-pills" id="platform-filters">
+            <button class="pill-btn active" data-platform="all">All Platforms</button>
+            <button class="pill-btn" data-platform="PC">PC</button>
+            <button class="pill-btn" data-platform="PS5">PS5</button>
+            <button class="pill-btn" data-platform="Xbox">Xbox Series X</button>
+            <button class="pill-btn" data-platform="VR">VR</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Search & Results Meta -->
+      <div class="results-meta" id="results-meta">
+        Showing <span id="game-count">0</span> games
+      </div>
+
+      <!-- Games Grid Container -->
+      <div class="games-grid" id="games-grid">
+        <!-- Dynamic Game Cards render here -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state" hidden>
+        <i class="fa-solid fa-ghost empty-icon"></i>
+        <h3>No Cyber Games Found</h3>
+        <p>No titles matched your current search filters. Try clearing your search term or selecting another category.</p>
+        <button class="btn btn-secondary" id="reset-filters-btn">Reset All Filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cyber Features / Banner Section -->
+  <section class="features-section" id="deals">
+    <div class="section-container">
+      <div class="feature-banner">
+        <div class="banner-glass">
+          <div class="banner-content">
+            <span class="badge-promo"><i class="fa-solid fa-gift"></i> CYBERPASS MEMBERSHIP</span>
+            <h2>UNLOCK UNLIMITED SCI-FI GAMING ACCESS</h2>
+            <p>Get instant day-one access to over 150+ premium cyberpunk titles, exclusive DLCs, and high-speed cloud gaming servers.</p>
+            <div class="banner-actions">
+              <button class="btn btn-primary" id="subscribe-pass-btn"><i class="fa-solid fa-shield-halved"></i> JOIN CYBERPASS FOR $9.99/MO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cyber-footer">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <div class="brand-logo">
+          <i class="fa-solid fa-vr-cardboard logo-icon"></i>
+          <span class="logo-main">CYBER<span class="text-cyan">GRID</span></span>
+        </div>
+        <p class="footer-desc">The ultimate digital destination for next-gen cyberpunk action, sci-fi simulations, and futuristic VR experiences.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-steam"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#hero">Home Portal</a></li>
+          <li><a href="#store">Store Catalog</a></li>
+          <li><a href="#deals">Cyber Deals</a></li>
+          <li><a href="#" id="view-wishlist-footer">My Wishlist</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#" class="footer-filter" data-cat="Action RPG">Action RPGs</a></li>
+          <li><a href="#" class="footer-filter" data-cat="Sci-Fi Sim">Sci-Fi Simulators</a></li>
+          <li><a href="#" class="footer-filter" data-cat="Cyberpunk Thriller">Cyber Thrillers</a></li>
+          <li><a href="#" class="footer-filter" data-cat="FPS Tactics">Tactical FPS</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col newsletter-col">
+        <h4>Join The Netrunner Dispatch</h4>
+        <p>Subscribe to receive instant deal alerts, secret discount codes, and beta access keys.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="Enter your runner email..." required id="newsletter-email">
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 CYBERGRID Interactive Inc. All rights reserved. System Operational.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security Protocol</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shopping Cart Slide-Out Drawer -->
+  <div class="cart-drawer-backdrop" id="cart-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping text-cyan"></i> YOUR CYBER CART (<span id="cart-items-count">0</span>)</h3>
+      <button class="close-drawer-btn" id="close-cart-btn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="drawer-body" id="cart-items-container">
+      <!-- Cart items rendered dynamically -->
+    </div>
+
+    <div class="drawer-footer">
+      <div class="promo-box">
+        <input type="text" id="promo-input" placeholder="Promo code (e.g. CYBER2099)">
+        <button id="apply-promo-btn" class="btn btn-secondary">Apply</button>
+      </div>
+      <div id="promo-msg" class="promo-status"></div>
+
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <div class="summary-row text-green" id="discount-row" hidden>
+          <span>Cyber Discount (20%)</span>
+          <span id="cart-discount">-$0.00</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total Amount</span>
+          <span class="total-price" id="cart-total">$0.00</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="checkout-btn" disabled>
+        <i class="fa-solid fa-credit-card"></i> PROCEED TO CHECKOUT
+      </button>
+    </div>
+  </aside>
+
+  <!-- Quick View Game Modal -->
+  <div class="modal-backdrop" id="quick-modal-backdrop">
+    <div class="modal-container" id="quick-modal">
+      <button class="modal-close" id="close-quick-modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-body" id="quick-modal-content">
+        <!-- Quick view content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Success Modal -->
+  <div class="modal-backdrop" id="checkout-modal-backdrop">
+    <div class="modal-container checkout-modal" id="checkout-modal">
+      <button class="modal-close" id="close-checkout-modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="checkout-success-body">
+        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h2>TRANSACTION VERIFIED!</h2>
+        <p class="order-id">Order Reference ID: <strong id="order-ref-id">#CYBER-884920</strong></p>
+        <p>Your game license keys have been generated and dispatched to your cloud library account. System ready for download!</p>
+
+        <div class="order-summary-box" id="checkout-summary-list"></div>
+
+        <button class="btn btn-primary" id="finish-order-btn"><i class="fa-solid fa-download"></i> GO TO MY LIBRARY</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wishlist Modal -->
+  <div class="modal-backdrop" id="wishlist-modal-backdrop">
+    <div class="modal-container wishlist-modal" id="wishlist-modal">
+      <button class="modal-close" id="close-wishlist-modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="wishlist-modal-header">
+        <h2><i class="fa-solid fa-heart text-magenta"></i> MY WISHLIST</h2>
+        <p>Games you saved for later.</p>
+      </div>
+      <div class="wishlist-modal-body" id="wishlist-items-container">
+        <!-- Dynamic wishlist items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Custom Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
