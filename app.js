@@ -1,701 +1,1052 @@
 /**
- * CYBERGRID // APPLICATION LOGIC
- * High-Performance Gaming Storefront Engine
+ * KASARYAR // ITEMMANIA-INSPIRED PREMIUM GAME TOP-UP STOREFRONT
+ * Medium-Sized Game Cards & Itemmania Exchange Slider
  */
 
-// ==========================================================================
-// 1. GAME DATASET
-// ==========================================================================
-const GAMES_DATA = [
+const HERO_BANNERS = [
   {
-    id: "neon-overdrive-2099",
-    title: "NEON OVERDRIVE 2099",
-    category: "Action RPG",
-    platforms: ["PC", "PS5", "Xbox"],
-    price: 49.99,
-    oldPrice: 69.99,
-    rating: 4.9,
-    reviewsCount: 1420,
-    discount: "30% OFF",
-    bestseller: true,
-    coverImg: "assets/neon_overdrive.jpg",
-    heroImg: "assets/cyber_banner.jpg",
-    description: "In Neo-Kyoto's dark underbelly, take control of an augmented Netrunner equipped with high-frequency plasma blades and quantum hacking abilities. Fight megacorporation security forces and rewrite the city grid.",
-    specs: {
-      os: "Windows 11 (64-bit)",
-      processor: "Intel Core i7-13700K / AMD Ryzen 7 7800X3D",
-      memory: "16 GB RAM",
-      graphics: "NVIDIA RTX 4070 / AMD Radeon RX 7800 XT",
-      storage: "85 GB SSD Space"
-    }
+    id: "mlbb-event",
+    gameId: "mobile-legends",
+    title: "MLBB 50% EXTRA DIAMONDS",
+    subtitle: "DOUBLE DIAMOND REFILL EVENT LIVE NOW",
+    cta: "TOP UP MLBB",
+    badge: "HOT EVENT",
+    img: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'><defs><linearGradient id='bg1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23130727'/><stop offset='50%' stop-color='%232a0845'/><stop offset='100%' stop-color='%2364159c'/></linearGradient></defs><rect width='1200' height='400' fill='url(%23bg1)'/><polygon points='800,0 1200,0 1200,400 700,400' fill='%2300f0ff' opacity='0.12'/><polygon points='950,40 1120,130 1120,310 950,390 780,310 780,130' fill='none' stroke='%23ffb700' stroke-width='6'/><polygon points='950,80 1060,150 950,280 840,150' fill='%2300f0ff' opacity='0.85'/><text x='70' y='140' font-family='Inter, sans-serif' font-weight='800' font-size='44' fill='%2300f0ff'>KASARYAR TOP-UP</text><text x='70' y='210' font-family='Inter, sans-serif' font-weight='900' font-size='56' fill='%23ffffff'>MOBILE LEGENDS 50% BONUS 💎</text><text x='70' y='265' font-family='Inter, sans-serif' font-weight='600' font-size='24' fill='%23ffea00'>Instant Player ID Refill in 2 Seconds</text></svg>`
   },
   {
-    id: "stellar-void",
-    title: "STELLAR VOID // HORIZONS",
-    category: "Sci-Fi Sim",
-    platforms: ["PC", "PS5", "VR"],
-    price: 59.99,
-    oldPrice: null,
-    rating: 4.8,
-    reviewsCount: 890,
-    discount: null,
-    bestseller: true,
-    coverImg: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
-    description: "Captain a custom modular dreadnought across procedural deep-space solar systems. Trade, mine quantum asteroids, build space stations, and battle alien armada fleets in full VR support.",
-    specs: {
-      os: "Windows 10/11 (64-bit)",
-      processor: "Intel Core i5-12600K / Ryzen 5 5600X",
-      memory: "16 GB RAM",
-      graphics: "NVIDIA RTX 3070 / Radeon RX 6700 XT",
-      storage: "120 GB SSD"
-    }
+    id: "pubg-uc-sale",
+    gameId: "pubg-mobile",
+    title: "PUBG MOBILE ROYALE PASS",
+    subtitle: "GET BONUS UC + EXCLUSIVE PASS REWARDS",
+    cta: "REFILL UC",
+    badge: "PROMO 10% OFF",
+    img: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'><defs><linearGradient id='bg2' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%230f1702'/><stop offset='50%' stop-color='%23273d04'/><stop offset='100%' stop-color='%23486b08'/></linearGradient></defs><rect width='1200' height='400' fill='url(%23bg2)'/><circle cx='1030' cy='200' r='115' fill='none' stroke='%23ffb700' stroke-width='8'/><rect x='950' y='165' width='160' height='70' rx='14' fill='%23ffea00'/><text x='1030' y='212' font-family='Inter, sans-serif' font-weight='900' font-size='36' fill='%23000000' text-anchor='middle'>UC 💵</text><text x='70' y='135' font-family='Inter, sans-serif' font-weight='800' font-size='42' fill='%23ffea00'>KASARYAR STORE</text><text x='70' y='205' font-family='Inter, sans-serif' font-weight='900' font-size='46' fill='%23ffffff'>PUBG MOBILE ROYALE PASS A9</text><text x='70' y='265' font-family='Inter, sans-serif' font-weight='600' font-size='24' fill='%2300f0ff'>600 + 60 Bonus UC Instant Delivery</text></svg>`
   },
   {
-    id: "quantum-nexus",
-    title: "QUANTUM NEXUS: PROTOCOL",
-    category: "Cyberpunk Thriller",
-    platforms: ["PC", "Xbox"],
-    price: 39.99,
-    oldPrice: 49.99,
-    rating: 4.7,
-    reviewsCount: 650,
-    discount: "20% OFF",
-    bestseller: false,
-    coverImg: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80",
-    description: "Manipulate temporal reality in a futuristic noir dystopian megacity. Reverse time to undo tactical errors, decipher hidden memory pods, and uncover a conspiracy that threatens human consciousness.",
-    specs: {
-      os: "Windows 11 (64-bit)",
-      processor: "Intel Core i7-10700 / Ryzen 7 3700X",
-      memory: "12 GB RAM",
-      graphics: "NVIDIA GTX 1080 Ti / RTX 3060",
-      storage: "60 GB SSD"
-    }
-  },
-  {
-    id: "synapse-breach",
-    title: "SYNAPSE BREACH // 2088",
-    category: "FPS Tactics",
-    platforms: ["PC", "PS5", "Xbox", "VR"],
-    price: 29.99,
-    oldPrice: 39.99,
-    rating: 4.6,
-    reviewsCount: 1120,
-    discount: "25% OFF",
-    bestseller: true,
-    coverImg: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80",
-    description: "Squad-based tactical cybernetic shooter. Infiltrate heavily defended server farms, employ stealth camouflage drones, and execute synchronized net-hacks with teammates.",
-    specs: {
-      os: "Windows 10/11",
-      processor: "Intel Core i5-11400",
-      memory: "8 GB RAM",
-      graphics: "NVIDIA GTX 1660 Super",
-      storage: "45 GB Space"
-    }
-  },
-  {
-    id: "cyber-drift-overdrive",
-    title: "CYBER DRIFT: ZERO G",
-    category: "Sci-Fi Sim",
-    platforms: ["PC", "PS5"],
-    price: 34.99,
-    oldPrice: null,
-    rating: 4.9,
-    reviewsCount: 430,
-    discount: null,
-    bestseller: false,
-    coverImg: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80",
-    description: "High-speed neon hovercraft racing featuring antigravity physics, customizable energy shields, and high-tempo synthwave soundtracks across 18 orbital tracks.",
-    specs: {
-      os: "Windows 11",
-      processor: "Intel Core i5-12400",
-      memory: "16 GB RAM",
-      graphics: "NVIDIA RTX 3060",
-      storage: "30 GB SSD"
-    }
-  },
-  {
-    id: "mecha-strike-prime",
-    title: "MECHA STRIKE: TITAN WARS",
-    category: "FPS Tactics",
-    platforms: ["PC", "PS5", "Xbox"],
-    price: 54.99,
-    oldPrice: 69.99,
-    rating: 4.8,
-    reviewsCount: 2100,
-    discount: "20% OFF",
-    bestseller: true,
-    coverImg: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80",
-    description: "Pilot 50-ton heavily armed combat exosuits. Customize railguns, particle beam cannons, and thermal thrusters in massive 32 vs 32 online orbital battlefields.",
-    specs: {
-      os: "Windows 11",
-      processor: "Intel Core i7-12700K",
-      memory: "32 GB RAM",
-      graphics: "NVIDIA RTX 4080",
-      storage: "100 GB SSD"
-    }
-  },
-  {
-    id: "chronos-awakening",
-    title: "CHRONOS // AWAKENING",
-    category: "Action RPG",
-    platforms: ["PC", "VR"],
-    price: 44.99,
-    oldPrice: null,
-    rating: 4.7,
-    reviewsCount: 310,
-    discount: null,
-    bestseller: false,
-    coverImg: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
-    description: "Immersive VR action RPG set in a derelict orbital research center overrun by rogue artificial intelligence. Utilize telekinetic energy gloves and energy shields.",
-    specs: {
-      os: "Windows 10/11",
-      processor: "Intel Core i7-11700K",
-      memory: "16 GB RAM",
-      graphics: "NVIDIA RTX 3070",
-      storage: "50 GB SSD"
-    }
-  },
-  {
-    id: "neural-shadow",
-    title: "NEURAL SHADOW: REDACTED",
-    category: "Cyberpunk Thriller",
-    platforms: ["PC", "PS5", "Xbox"],
-    price: 24.99,
-    oldPrice: 34.99,
-    rating: 4.5,
-    reviewsCount: 520,
-    discount: "30% OFF",
-    bestseller: false,
-    coverImg: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80",
-    description: "An isometric tactical stealth hacker game. Hack security cameras, corrupt memory nodes, and bypass cybernetic guards without firing a single shot.",
-    specs: {
-      os: "Windows 10/11",
-      processor: "Intel Core i3-10100",
-      memory: "8 GB RAM",
-      graphics: "NVIDIA GTX 1060",
-      storage: "25 GB Space"
-    }
+    id: "genshin-crystals",
+    gameId: "genshin-impact",
+    title: "GENSHIN CRYSTAL RESET",
+    subtitle: "DOUBLE GENESIS CRYSTALS ON FIRST TOP-UP",
+    cta: "TOP UP CRYSTALS",
+    badge: "OFFICIAL SYNC",
+    img: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'><defs><linearGradient id='bg3' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23021424'/><stop offset='50%' stop-color='%2308365c'/><stop offset='100%' stop-color='%230f5b96'/></linearGradient></defs><rect width='1200' height='400' fill='url(%23bg3)'/><polygon points='950,40 1060,200 950,360 840,200' fill='%2300f0ff'/><polygon points='950,75 1020,200 950,325 880,200' fill='%23ffffff' opacity='0.85'/><text x='70' y='140' font-family='Inter, sans-serif' font-weight='800' font-size='44' fill='%2300f0ff'>KASARYAR NEXUS</text><text x='70' y='210' font-family='Inter, sans-serif' font-weight='900' font-size='56' fill='%23ffffff'>GENSHIN WELKIN %26 CRYSTALS 🔮</text><text x='70' y='265' font-family='Inter, sans-serif' font-weight='600' font-size='24' fill='%23ffea00'>100% Official UID Mail Direct Credit</text></svg>`
   }
 ];
 
-// ==========================================================================
-// 2. STATE MANAGEMENT
-// ==========================================================================
-let state = {
-  cart: JSON.parse(localStorage.getItem('cybergrid_cart')) || [],
-  wishlist: JSON.parse(localStorage.getItem('cybergrid_wishlist')) || [],
-  appliedPromo: null,
-  activeCategory: 'all',
-  activePlatform: 'all',
-  searchTerm: '',
-  sortBy: 'featured'
+const GAME_POSTER_SVGS = {
+  "mobile-legends": `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><defs><linearGradient id='g1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%232b1055'/><stop offset='100%' stop-color='%237510a3'/></linearGradient></defs><rect width='300' height='300' fill='url(%23g1)'/><polygon points='150,40 230,100 230,200 150,260 70,200 70,100' fill='none' stroke='%23ffb700' stroke-width='6'/><polygon points='150,70 190,120 150,220 110,120' fill='%2300f0ff' opacity='0.9'/><text x='150' y='242' font-family='Inter, sans-serif' font-weight='900' font-size='22' fill='%23ffffff' text-anchor='middle'>MLBB</text></svg>`,
+  "pubg-mobile": `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><defs><linearGradient id='g2' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%231a2601'/><stop offset='100%' stop-color='%234a5d09'/></linearGradient></defs><rect width='300' height='300' fill='url(%23g2)'/><circle cx='150' cy='120' r='50' fill='none' stroke='%23ffb700' stroke-width='8'/><rect x='110' y='105' width='80' height='30' rx='6' fill='%23ffea00'/><text x='150' y='126' font-family='Inter, sans-serif' font-weight='900' font-size='18' fill='%23000000' text-anchor='middle'>UC 💵</text><text x='150' y='240' font-family='Inter, sans-serif' font-weight='900' font-size='20' fill='%23ffffff' text-anchor='middle'>PUBG MOBILE</text></svg>`,
+  "free-fire": `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><defs><linearGradient id='g3' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23500505'/><stop offset='100%' stop-color='%23a81212'/></linearGradient></defs><rect width='300' height='300' fill='url(%23g3)'/><path d='M150,40 Q190,110 150,180 Q110,110 150,40 Z' fill='%23ff0055'/><path d='M150,70 Q170,120 150,160 Q130,120 150,70 Z' fill='%23ffea00'/><text x='150' y='240' font-family='Inter, sans-serif' font-weight='900' font-size='20' fill='%23ffffff' text-anchor='middle'>FREE FIRE MAX</text></svg>`,
+  "genshin-impact": `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><defs><linearGradient id='g4' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23052440'/><stop offset='100%' stop-color='%230b558c'/></linearGradient></defs><rect width='300' height='300' fill='url(%23g4)'/><polygon points='150,40 195,115 150,200 105,115' fill='%2300f0ff'/><polygon points='150,65 180,115 150,175 120,115' fill='%23ffffff' opacity='0.8'/><text x='150' y='240' font-family='Inter, sans-serif' font-weight='900' font-size='18' fill='%23ffffff' text-anchor='middle'>GENSHIN IMPACT</text></svg>`,
+  "valorant": `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><defs><linearGradient id='g5' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23380813'/><stop offset='100%' stop-color='%238a0f25'/></linearGradient></defs><rect width='300' height='300' fill='url(%23g5)'/><path d='M80,70 L140,70 L180,170 L120,170 Z' fill='%23ff0055'/><path d='M190,70 L220,70 L170,170 L140,170 Z' fill='%23ffffff'/><text x='150' y='240' font-family='Inter, sans-serif' font-weight='900' font-size='22' fill='%23ffffff' text-anchor='middle'>VALORANT</text></svg>`,
+  "roblox": `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><defs><linearGradient id='g6' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23053616'/><stop offset='100%' stop-color='%230d7c35'/></linearGradient></defs><rect width='300' height='300' fill='url(%23g6)'/><rect x='100' y='70' width='100' height='100' rx='14' fill='%2300e676' transform='rotate(15 150 120)'/><rect x='130' y='100' width='40' height='40' rx='6' fill='%23053616' transform='rotate(15 150 120)'/><text x='150' y='240' font-family='Inter, sans-serif' font-weight='900' font-size='22' fill='%23ffffff' text-anchor='middle'>ROBLOX</text></svg>`,
+  "steam-wallet": `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><defs><linearGradient id='g7' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%230c1c38'/><stop offset='100%' stop-color='%23173d78'/></linearGradient></defs><rect width='300' height='300' fill='url(%23g7)'/><circle cx='170' cy='90' r='30' fill='none' stroke='%2300f0ff' stroke-width='8'/><circle cx='105' cy='155' r='22' fill='none' stroke='%2300f0ff' stroke-width='8'/><line x1='135' y1='125' x2='170' y2='90' stroke='%2300f0ff' stroke-width='8'/><text x='150' y='240' font-family='Inter, sans-serif' font-weight='900' font-size='19' fill='%23ffffff' text-anchor='middle'>STEAM WALLET</text></svg>`
 };
 
-// Save to LocalStorage helpers
+const TOPUP_GAMES_DATA = [
+  {
+    id: "mobile-legends",
+    title: "Mobile Legends: Bang Bang",
+    publisher: "Moonton",
+    category: "MOBA",
+    platform: "Mobile",
+    currencyName: "Diamonds 💎",
+    badge: "HOT",
+    bestseller: true,
+    requiresZoneId: true,
+    coverImg: GAME_POSTER_SVGS["mobile-legends"],
+    description: "Instant MLBB Diamonds refill.",
+    sampleIgn: "Kasaryar_MLBB",
+    packages: [
+      { id: "ml-50", name: "50 Diamonds", amount: 50, bonus: null, price: 1400, priceUsd: 0.69, tag: null },
+      { id: "ml-250", name: "250 + 25 Bonus Diamonds", amount: 275, bonus: "+25 Bonus", price: 6800, priceUsd: 3.29, tag: "POPULAR" },
+      { id: "ml-500", name: "500 + 65 Bonus Diamonds", amount: 565, bonus: "+65 Bonus", price: 13500, priceUsd: 6.49, tag: "BEST VALUE" },
+      { id: "ml-1000", name: "1,000 + 150 Bonus Diamonds", amount: 1150, bonus: "+150 Bonus", price: 26500, priceUsd: 12.99, tag: "MEGA PACK" },
+      { id: "ml-weekly", name: "Weekly Diamond Pass", amount: 1, bonus: "210 Diamonds Total", price: 5200, priceUsd: 2.49, tag: "SPECIAL" }
+    ]
+  },
+  {
+    id: "pubg-mobile",
+    title: "PUBG Mobile",
+    publisher: "Tencent / Krafton",
+    category: "Battle Royale",
+    platform: "Mobile",
+    currencyName: "UC 💵",
+    badge: "HOT",
+    bestseller: true,
+    requiresZoneId: false,
+    coverImg: GAME_POSTER_SVGS["pubg-mobile"],
+    description: "Official PUBG Mobile UC & Royale Pass.",
+    sampleIgn: "Kasaryar_UC",
+    packages: [
+      { id: "pubg-60", name: "60 UC", amount: 60, bonus: null, price: 2200, priceUsd: 0.99, tag: null },
+      { id: "pubg-300", name: "300 + 25 Extra UC", amount: 325, bonus: "+25 Bonus UC", price: 10500, priceUsd: 4.99, tag: "POPULAR" },
+      { id: "pubg-600", name: "600 + 60 Extra UC", amount: 660, bonus: "+60 Bonus UC", price: 21000, priceUsd: 9.99, tag: "BEST VALUE" },
+      { id: "pubg-rp", name: "Royale Pass Month", amount: 300, bonus: "Pass Unlock", price: 10500, priceUsd: 4.99, tag: "PASS" }
+    ]
+  },
+  {
+    id: "free-fire",
+    title: "Free Fire MAX",
+    publisher: "Garena",
+    category: "Battle Royale",
+    platform: "Mobile",
+    currencyName: "Diamonds 💎",
+    badge: "EVENT",
+    bestseller: true,
+    requiresZoneId: false,
+    coverImg: GAME_POSTER_SVGS["free-fire"],
+    description: "Free Fire Player ID diamond refill.",
+    sampleIgn: "Kasaryar_FF",
+    packages: [
+      { id: "ff-100", name: "100 + 10 Bonus Diamonds", amount: 110, bonus: "+10 Bonus", price: 2500, priceUsd: 1.10, tag: null },
+      { id: "ff-310", name: "310 + 31 Bonus Diamonds", amount: 341, bonus: "+31 Bonus", price: 7500, priceUsd: 3.49, tag: "POPULAR" },
+      { id: "ff-520", name: "520 + 52 Bonus Diamonds", amount: 572, bonus: "+52 Bonus", price: 12000, priceUsd: 5.99, tag: "BEST VALUE" }
+    ]
+  },
+  {
+    id: "genshin-impact",
+    title: "Genshin Impact",
+    publisher: "HoYoverse",
+    category: "Gacha / RPG",
+    platform: "Universal",
+    currencyName: "Crystals 🔮",
+    badge: "OFFICIAL",
+    bestseller: true,
+    requiresZoneId: true,
+    coverImg: GAME_POSTER_SVGS["genshin-impact"],
+    description: "Genshin Welkin & Crystals UID refill.",
+    sampleIgn: "Kasaryar_GI",
+    packages: [
+      { id: "gi-welkin", name: "Blessing of the Welkin Moon", amount: 3000, bonus: "300 Crystals + 2700 Primo", price: 12500, priceUsd: 4.99, tag: "BESTSELLER" },
+      { id: "gi-60", name: "60 Genesis Crystals", amount: 60, bonus: null, price: 2500, priceUsd: 0.99, tag: null },
+      { id: "gi-300", name: "300 + 30 Extra Crystals", amount: 330, bonus: "+30 Bonus", price: 12500, priceUsd: 4.99, tag: null }
+    ]
+  },
+  {
+    id: "valorant",
+    title: "Valorant",
+    publisher: "Riot Games",
+    category: "Tactical FPS",
+    platform: "PC",
+    currencyName: "VP Points 🎯",
+    badge: "PIN",
+    bestseller: true,
+    requiresZoneId: false,
+    coverImg: GAME_POSTER_SVGS["valorant"],
+    description: "Riot VP refill for skin bundles.",
+    sampleIgn: "Kasaryar_Val",
+    packages: [
+      { id: "val-475", name: "475 VP", amount: 475, bonus: null, price: 12500, priceUsd: 4.99, tag: null },
+      { id: "val-1000", name: "1,000 VP", amount: 1000, bonus: null, price: 25000, priceUsd: 9.99, tag: "POPULAR" }
+    ]
+  },
+  {
+    id: "roblox",
+    title: "Roblox",
+    publisher: "Roblox Corp",
+    category: "Gacha / RPG",
+    platform: "Universal",
+    currencyName: "Robux 🟩",
+    badge: "CODE",
+    bestseller: false,
+    requiresZoneId: false,
+    coverImg: GAME_POSTER_SVGS["roblox"],
+    description: "Instant Roblox Robux refill.",
+    sampleIgn: "Kasaryar_Robux",
+    packages: [
+      { id: "rbx-400", name: "400 Robux", amount: 400, bonus: null, price: 12500, priceUsd: 4.99, tag: null },
+      { id: "rbx-800", name: "800 Robux", amount: 800, bonus: null, price: 25000, priceUsd: 9.99, tag: "POPULAR" }
+    ]
+  },
+  {
+    id: "steam-wallet",
+    title: "Steam Wallet Card",
+    publisher: "Valve",
+    category: "Gift Cards",
+    platform: "PC",
+    currencyName: "Funds 🎮",
+    badge: "GLOBAL",
+    bestseller: true,
+    requiresZoneId: false,
+    coverImg: GAME_POSTER_SVGS["steam-wallet"],
+    description: "Digital Steam Wallet card code.",
+    sampleIgn: "Kasaryar_Steam",
+    packages: [
+      { id: "steam-5", name: "$5 Steam Card", amount: 5, bonus: "Global Code", price: 13500, priceUsd: 5.00, tag: null },
+      { id: "steam-10", name: "$10 Steam Card", amount: 10, bonus: "Global Code", price: 27000, priceUsd: 10.00, tag: "POPULAR" }
+    ]
+  }
+];
+
+const PAYMENT_METHODS = [
+  { id: "kbzpay", name: "KBZPay", icon: "fa-solid fa-wallet", fee: "0%", color: "#005bb5", desc: "Instant Scan Pay", accountName: "KASARYAR TOPUP", accountNo: "09970123456" },
+  { id: "wavepay", name: "WavePay", icon: "fa-solid fa-mobile-screen-button", fee: "0%", color: "#ffcb05", desc: "Direct Wave QR", accountName: "KASARYAR PAY", accountNo: "09970123456" },
+  { id: "ayapay", name: "AYA Pay", icon: "fa-solid fa-credit-card", fee: "0%", color: "#d32f2f", desc: "AYA QR Pay", accountName: "KASARYAR ENT", accountNo: "09970123456" },
+  { id: "card", name: "Visa / Card", icon: "fa-brands fa-cc-visa", fee: "1.5%", color: "#1a1f71", desc: "Credit/Debit Card", accountName: "KASARYAR GLOBAL", accountNo: "4111-2222-3333-4444" },
+  { id: "crypto", name: "Crypto USDT", icon: "fa-brands fa-bitcoin", fee: "0%", color: "#f7931a", desc: "TRC20 USDT QR", accountName: "KASARYAR VAULT", accountNo: "TYX98k7LpQzM3n1b2v4x5c6v7b8n9m0q1w" }
+];
+
+let state = {
+  cart: JSON.parse(localStorage.getItem('kasaryar_topup_cart')) || [],
+  recentOrders: JSON.parse(localStorage.getItem('kasaryar_orders')) || [],
+  activeCategory: 'all',
+  searchTerm: '',
+
+  currentHeroSlide: 0,
+  heroAutoplayTimer: null,
+
+  selectedGame: null,
+  selectedPackage: null,
+  verifiedIgn: null,
+  userIdInput: '',
+  zoneIdInput: '',
+  selectedPayment: 'kbzpay',
+
+  currentPendingOrder: null,
+  qrTimerInterval: null,
+  welcomeTimerInterval: null
+};
+
 function saveCart() {
-  localStorage.setItem('cybergrid_cart', JSON.stringify(state.cart));
+  localStorage.setItem('kasaryar_topup_cart', JSON.stringify(state.cart));
   updateCartBadge();
 }
 
-function saveWishlist() {
-  localStorage.setItem('cybergrid_wishlist', JSON.stringify(state.wishlist));
-  updateWishlistBadge();
+function saveOrders() {
+  localStorage.setItem('kasaryar_orders', JSON.stringify(state.recentOrders));
 }
 
-// ==========================================================================
-// 3. DOM ELEMENTS
-// ==========================================================================
-document.addEventListener('DOMContentLoaded', () => {
-  initApp();
-});
+// THEME MANAGEMENT (LIGHT & DARK MODE)
+function initTheme() {
+  const savedTheme = localStorage.getItem('kasaryar_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  setTheme(savedTheme, false);
+}
 
-function initApp() {
+function setTheme(theme, showNotification = true) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('kasaryar_theme', theme);
+  
+  const themeIcon = document.getElementById('theme-icon');
+  if (themeIcon) {
+    if (theme === 'light') {
+      themeIcon.className = 'fa-solid fa-sun text-orange';
+    } else {
+      themeIcon.className = 'fa-solid fa-moon text-cyan';
+    }
+  }
+
+  if (showNotification) {
+    showToast(`Switched to ${theme.toUpperCase()} mode 🌓`);
+  }
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  setTheme(newTheme, true);
+}
+
+// Initialize theme immediately
+initTheme();
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  renderHeroBanners();
+  startHeroBannerAutoplay();
+
   renderGamesGrid();
   updateCartBadge();
-  updateWishlistBadge();
   setupEventListeners();
+  triggerWelcomePromoModal();
+});
+
+// BIG ANIMATED HERO BANNER CAROUSEL
+function renderHeroBanners() {
+  const track = document.getElementById('hero-banner-track');
+  const dotsContainer = document.getElementById('hero-dots');
+  if (!track) return;
+
+  track.innerHTML = HERO_BANNERS.map((b, idx) => `
+    <div class="hero-slide-item ${idx === 0 ? 'active' : ''}" data-slide-index="${idx}" onclick="openTopUpModal('${b.gameId}')">
+      <img src="${b.img}" alt="${b.title}" class="hero-slide-img">
+      <div class="hero-slide-overlay">
+        <div class="hero-slide-content">
+          <span class="hero-slide-badge"><i class="fa-solid fa-fire text-orange"></i> ${b.badge}</span>
+          <button class="hero-slide-cta btn btn-primary"><i class="fa-solid fa-bolt"></i> ${b.cta}</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  if (dotsContainer) {
+    dotsContainer.innerHTML = HERO_BANNERS.map((_, idx) => `
+      <span class="dot ${idx === 0 ? 'active' : ''}" onclick="goToHeroSlide(${idx})"></span>
+    `).join('');
+  }
 }
 
-// ==========================================================================
-// 4. RENDERING CATALOG
-// ==========================================================================
-function getFilteredGames() {
-  return GAMES_DATA.filter(game => {
-    // Category Filter
-    const matchesCategory = state.activeCategory === 'all' || game.category === state.activeCategory;
-    
-    // Platform Filter
-    const matchesPlatform = state.activePlatform === 'all' || game.platforms.includes(state.activePlatform);
-    
-    // Search Term Filter
-    const query = state.searchTerm.toLowerCase();
-    const matchesSearch = !query || 
-      game.title.toLowerCase().includes(query) ||
-      game.category.toLowerCase().includes(query) ||
-      game.platforms.some(p => p.toLowerCase().includes(query));
+function slideHeroBanner(direction) {
+  if (direction === 'next') {
+    state.currentHeroSlide = (state.currentHeroSlide + 1) % HERO_BANNERS.length;
+  } else {
+    state.currentHeroSlide = (state.currentHeroSlide - 1 + HERO_BANNERS.length) % HERO_BANNERS.length;
+  }
+  updateHeroSlideUI();
+}
 
-    return matchesCategory && matchesPlatform && matchesSearch;
-  }).sort((a, b) => {
-    if (state.sortBy === 'price-low') return a.price - b.price;
-    if (state.sortBy === 'price-high') return b.price - a.price;
-    if (state.sortBy === 'rating') return b.rating - a.rating;
-    if (state.sortBy === 'title') return a.title.localeCompare(b.title);
-    return 0; // Default featured
+function goToHeroSlide(index) {
+  state.currentHeroSlide = index;
+  updateHeroSlideUI();
+}
+
+function updateHeroSlideUI() {
+  const slides = document.querySelectorAll('.hero-slide-item');
+  const dots = document.querySelectorAll('.hero-dots .dot');
+
+  slides.forEach((slide, idx) => {
+    slide.classList.toggle('active', idx === state.currentHeroSlide);
+  });
+
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === state.currentHeroSlide);
   });
 }
 
-function renderGamesGrid() {
-  const container = document.getElementById('games-grid');
-  const countEl = document.getElementById('game-count');
-  const emptyEl = document.getElementById('empty-state');
-  
-  const filtered = getFilteredGames();
-  countEl.textContent = filtered.length;
+function startHeroBannerAutoplay() {
+  if (state.heroAutoplayTimer) clearInterval(state.heroAutoplayTimer);
+  state.heroAutoplayTimer = setInterval(() => {
+    slideHeroBanner('next');
+  }, 3500);
+}
 
-  if (filtered.length === 0) {
-    container.innerHTML = '';
-    emptyEl.hidden = false;
-    return;
+// Welcome Promo Pop-up
+function triggerWelcomePromoModal() {
+  if (localStorage.getItem('kasaryar_hide_promo') === 'true') return;
+
+  const modalBackdrop = document.getElementById('welcome-promo-backdrop');
+  const timerBadge = document.getElementById('welcome-timer-count');
+  if (!modalBackdrop) return;
+
+  modalBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  let countdown = 8;
+  if (timerBadge) timerBadge.textContent = countdown;
+
+  state.welcomeTimerInterval = setInterval(() => {
+    countdown--;
+    if (timerBadge) timerBadge.textContent = countdown;
+
+    if (countdown <= 0) {
+      closeWelcomePromoModal();
+    }
+  }, 1000);
+}
+
+function closeWelcomePromoModal() {
+  const modalBackdrop = document.getElementById('welcome-promo-backdrop');
+  const chk = document.getElementById('dont-show-today-chk');
+
+  if (chk && chk.checked) {
+    localStorage.setItem('kasaryar_hide_promo', 'true');
   }
 
-  emptyEl.hidden = true;
-  container.innerHTML = filtered.map(game => {
-    const isWishlisted = state.wishlist.some(w => w.id === game.id);
-    const isInCart = state.cart.some(c => c.id === game.id);
+  if (modalBackdrop) modalBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
 
+  if (state.welcomeTimerInterval) {
+    clearInterval(state.welcomeTimerInterval);
+    state.welcomeTimerInterval = null;
+  }
+}
+
+function claimEventPromo() {
+  closeWelcomePromoModal();
+  showToast('Promo Code CYBER2099 Applied! 15% OFF Discount 🎁');
+  openTopUpModal('genshin-impact');
+}
+
+// ITEMMANIA MEDIUM GAME CARDS RENDERER & SLIDER
+function renderGamesGrid() {
+  const sliderContainer = document.getElementById('games-grid');
+  const gameCountEl = document.getElementById('game-count');
+  const emptyStateEl = document.getElementById('empty-state');
+
+  if (!sliderContainer) return;
+
+  let filtered = TOPUP_GAMES_DATA.filter(game => {
+    const matchesCategory = state.activeCategory === 'all' || game.category === state.activeCategory;
+    const query = state.searchTerm.toLowerCase();
+    const matchesSearch = game.title.toLowerCase().includes(query) ||
+                          game.publisher.toLowerCase().includes(query) ||
+                          game.category.toLowerCase().includes(query);
+
+    return matchesCategory && matchesSearch;
+  });
+
+  if (gameCountEl) gameCountEl.textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    sliderContainer.style.display = 'none';
+    if (emptyStateEl) emptyStateEl.hidden = false;
+    return;
+  } else {
+    sliderContainer.style.display = 'flex';
+    if (emptyStateEl) emptyStateEl.hidden = true;
+  }
+
+  // Trigger refresh transition animation
+  sliderContainer.classList.remove('grid-refreshing');
+  void sliderContainer.offsetWidth; // Force reflow
+  sliderContainer.classList.add('grid-refreshing');
+
+  // ITEMMANIA MEDIUM-SIZED GAME CARD HTML
+  sliderContainer.innerHTML = filtered.map(game => {
+    const minPrice = Math.min(...game.packages.map(p => p.price));
     return `
-      <article class="game-card" data-id="${game.id}">
-        <div class="card-thumb-wrapper">
-          <img src="${game.coverImg}" alt="${game.title}" class="card-img" loading="lazy">
+      <div class="cyber-game-card slide-card itemmania-card" data-game-id="${game.id}">
+        <div class="card-image-wrap itemmania-img-wrap">
+          <img src="${game.coverImg}" alt="${game.title}" class="game-cover-img" loading="lazy">
+          <span class="currency-tag itemmania-currency">${game.currencyName}</span>
+          ${game.badge ? `<span class="bestseller-badge itemmania-badge">${game.badge}</span>` : ''}
+        </div>
+        
+        <div class="card-body itemmania-body">
+          <div class="game-publisher itemmania-pub">${game.publisher}</div>
+          <h3 class="game-title itemmania-title">${game.title}</h3>
           
-          <div class="card-badges">
-            ${game.discount ? `<span class="badge-tag discount">${game.discount}</span>` : ''}
-            ${game.bestseller ? `<span class="badge-tag"><i class="fa-solid fa-fire text-magenta"></i> BESTSELLER</span>` : ''}
+          <div class="starting-price-badge">
+            <i class="fa-solid fa-tag"></i> From ${minPrice.toLocaleString()} Ks
           </div>
-
-          <button class="card-fav-btn ${isWishlisted ? 'active' : ''}" onclick="toggleWishlist('${game.id}')" title="Toggle Wishlist">
-            <i class="fa-${isWishlisted ? 'solid' : 'regular'} fa-heart"></i>
-          </button>
-        </div>
-
-        <div class="card-content">
-          <div class="card-category">${game.category.toUpperCase()}</div>
-          <h3 class="card-title">${game.title}</h3>
-
-          <div class="card-rating">
-            <i class="fa-solid fa-star"></i>
-            <span>${game.rating}</span>
-            <span style="color:var(--text-muted);">(${game.reviewsCount})</span>
-          </div>
-
-          <div class="card-footer">
-            <div class="card-price">
-              $${game.price.toFixed(2)}
-              ${game.oldPrice ? `<span class="old-price">$${game.oldPrice.toFixed(2)}</span>` : ''}
+          
+          <div class="card-footer itemmania-footer">
+            <div class="price-box itemmania-price-box">
+              <span class="price-label itemmania-price-label">FROM</span>
+              <span class="price-val itemmania-price-val">${minPrice.toLocaleString()} Ks</span>
             </div>
-
-            <div class="card-actions">
-              <button class="btn btn-secondary btn-icon-only" onclick="openQuickView('${game.id}')" title="Quick View">
-                <i class="fa-solid fa-eye"></i>
-              </button>
-              <button class="btn ${isInCart ? 'btn-secondary' : 'btn-primary'}" onclick="addToCart('${game.id}')">
-                <i class="fa-solid fa-cart-plus"></i> ${isInCart ? 'IN CART' : 'ADD'}
-              </button>
-            </div>
+            <button class="btn btn-topup" onclick="openTopUpModal('${game.id}')">
+              <i class="fa-solid fa-bolt"></i> TOP UP
+            </button>
           </div>
         </div>
-      </article>
+      </div>
     `;
   }).join('');
 }
 
-// ==========================================================================
-// 5. EVENT LISTENERS & FILTER HANDLERS
-// ==========================================================================
-function setupEventListeners() {
-  // Search Input
-  const searchInput = document.getElementById('global-search-input');
-  const clearSearchBtn = document.getElementById('clear-search');
+function slideGames(direction) {
+  const container = document.getElementById('games-grid');
+  if (!container) return;
 
-  searchInput.addEventListener('input', (e) => {
-    state.searchTerm = e.target.value;
-    clearSearchBtn.hidden = !state.searchTerm;
-    renderGamesGrid();
+  const scrollAmount = 204; // Itemmania card width (190px + 14px gap)
+  if (direction === 'next') {
+    container.scrollBy({ left: scrollAmount * 2, behavior: 'smooth' });
+  } else {
+    container.scrollBy({ left: -scrollAmount * 2, behavior: 'smooth' });
+  }
+}
+
+// Configurator Modal
+function openTopUpModal(gameId) {
+  const game = TOPUP_GAMES_DATA.find(g => g.id === gameId);
+  if (!game) return;
+
+  state.selectedGame = game;
+  state.selectedPackage = game.packages[0];
+  state.verifiedIgn = null;
+  state.userIdInput = '';
+  state.zoneIdInput = '';
+
+  const modalBackdrop = document.getElementById('topup-modal-backdrop');
+  const modalContent = document.getElementById('topup-modal-content');
+
+  if (!modalBackdrop || !modalContent) return;
+
+  modalContent.innerHTML = buildTopUpModalHTML(game);
+  modalBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  setupModalHandlers(game);
+}
+
+function closeTopUpModal() {
+  const modalBackdrop = document.getElementById('topup-modal-backdrop');
+  if (modalBackdrop) modalBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function buildTopUpModalHTML(game) {
+  return `
+    <div class="topup-modal-wrapper">
+      <div class="topup-header">
+        <div class="topup-header-info">
+          <img src="${game.coverImg}" alt="${game.title}" class="topup-game-thumb">
+          <div>
+            <h2 class="topup-game-name">${game.title}</h2>
+            <div class="currency-badge"><i class="fa-solid fa-gem text-cyan"></i> ${game.currencyName}</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeTopUpModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="topup-modal-body">
+        <div class="topup-step-box">
+          <div class="step-title">
+            <span class="step-num">1</span>
+            <h3>PLAYER ID</h3>
+          </div>
+
+          <div class="player-id-grid">
+            <div class="input-group">
+              <label for="modal-user-id">User ID <span class="text-magenta">*</span></label>
+              <input type="text" id="modal-user-id" placeholder="e.g. 123456789" class="cyber-input" autocomplete="off">
+            </div>
+
+            ${game.requiresZoneId ? `
+              <div class="input-group">
+                <label for="modal-zone-id">Zone ID <span class="text-magenta">*</span></label>
+                <input type="text" id="modal-zone-id" placeholder="e.g. 2099" class="cyber-input" autocomplete="off">
+              </div>
+            ` : ''}
+
+            <button type="button" class="btn btn-secondary" id="verify-id-btn">
+              <i class="fa-solid fa-check"></i> VERIFY
+            </button>
+          </div>
+
+          <div id="verify-status-box" class="verify-status-box" hidden></div>
+        </div>
+
+        <div class="topup-step-box">
+          <div class="step-title">
+            <span class="step-num">2</span>
+            <h3>SELECT PACKAGE</h3>
+          </div>
+
+          <div class="packages-grid" id="packages-grid">
+            ${game.packages.map((pkg, idx) => `
+              <div class="package-card ${idx === 0 ? 'selected' : ''}" data-pkg-id="${pkg.id}">
+                ${pkg.tag ? `<span class="pkg-tag">${pkg.tag}</span>` : ''}
+                <div class="pkg-name">${pkg.name}</div>
+                ${pkg.bonus ? `<div class="pkg-bonus">${pkg.bonus}</div>` : ''}
+                <div class="pkg-price">${pkg.price.toLocaleString()} Ks</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="topup-step-box">
+          <div class="step-title">
+            <span class="step-num">3</span>
+            <h3>PAYMENT METHOD</h3>
+          </div>
+
+          <div class="payment-grid" id="payment-grid">
+            ${PAYMENT_METHODS.map((pm, idx) => `
+              <div class="payment-card ${idx === 0 ? 'selected' : ''}" data-pay-id="${pm.id}">
+                <i class="${pm.icon}" style="color:${pm.color}"></i>
+                <div class="pay-info">
+                  <div class="pay-name">${pm.name}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div class="topup-modal-footer">
+        <div class="summary-preview">
+          <div class="summary-val" id="modal-summary-item">${game.packages[0].name}</div>
+          <div class="summary-total" id="modal-summary-price">${game.packages[0].price.toLocaleString()} Ks</div>
+        </div>
+
+        <div class="modal-actions-group">
+          <button class="btn btn-secondary" id="modal-add-cart-btn">ADD TO CART</button>
+          <button class="btn btn-primary" id="modal-direct-buy-btn"><i class="fa-solid fa-qrcode"></i> PAY NOW</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function setupModalHandlers(game) {
+  const pkgCards = document.querySelectorAll('.package-card');
+  pkgCards.forEach(card => {
+    card.addEventListener('click', () => {
+      pkgCards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const pkgId = card.getAttribute('data-pkg-id');
+      state.selectedPackage = game.packages.find(p => p.id === pkgId);
+
+      document.getElementById('modal-summary-item').textContent = state.selectedPackage.name;
+      document.getElementById('modal-summary-price').textContent = `${state.selectedPackage.price.toLocaleString()} Ks`;
+    });
   });
 
-  clearSearchBtn.addEventListener('click', () => {
-    searchInput.value = '';
-    state.searchTerm = '';
-    clearSearchBtn.hidden = true;
-    renderGamesGrid();
+  const payCards = document.querySelectorAll('.payment-card');
+  payCards.forEach(card => {
+    card.addEventListener('click', () => {
+      payCards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.selectedPayment = card.getAttribute('data-pay-id');
+    });
   });
 
-  // Sort Select
-  document.getElementById('sort-select').addEventListener('change', (e) => {
-    state.sortBy = e.target.value;
-    renderGamesGrid();
-  });
+  const verifyBtn = document.getElementById('verify-id-btn');
+  const userIdInput = document.getElementById('modal-user-id');
+  const zoneIdInput = document.getElementById('modal-zone-id');
+  const statusBox = document.getElementById('verify-status-box');
 
-  // Category Filter Pills
-  document.getElementById('category-filters').addEventListener('click', (e) => {
-    if (e.target.classList.contains('pill-btn')) {
-      document.querySelectorAll('#category-filters .pill-btn').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      state.activeCategory = e.target.dataset.category;
-      renderGamesGrid();
+  verifyBtn.addEventListener('click', () => {
+    const userId = userIdInput.value.trim();
+    const zoneId = zoneIdInput ? zoneIdInput.value.trim() : '';
+
+    if (!userId) {
+      showToast('Please enter Player ID.', 'warning');
+      return;
     }
+
+    verifyBtn.disabled = true;
+    verifyBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+    setTimeout(() => {
+      verifyBtn.disabled = false;
+      verifyBtn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
+
+      state.verifiedIgn = game.sampleIgn + "_" + userId.slice(-3);
+      state.userIdInput = userId;
+      state.zoneIdInput = zoneId;
+
+      statusBox.hidden = false;
+      statusBox.innerHTML = `
+        <div class="verify-success" style="font-size:0.85rem; color:#00e676; margin-top:6px;">
+          <i class="fa-solid fa-circle-check"></i> Verified: ${state.verifiedIgn} (${userId})
+        </div>
+      `;
+    }, 400);
   });
 
-  // Platform Filter Pills
-  document.getElementById('platform-filters').addEventListener('click', (e) => {
-    if (e.target.classList.contains('pill-btn')) {
-      document.querySelectorAll('#platform-filters .pill-btn').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      state.activePlatform = e.target.dataset.platform;
-      renderGamesGrid();
-    }
+  document.getElementById('modal-add-cart-btn').addEventListener('click', () => {
+    if (!validateModalForm(game)) return;
+    addToCart(game, state.selectedPackage, state.userIdInput, state.zoneIdInput, state.verifiedIgn);
+    closeTopUpModal();
   });
 
-  // Reset Filters Button
-  document.getElementById('reset-filters-btn').addEventListener('click', () => {
-    state.activeCategory = 'all';
-    state.activePlatform = 'all';
-    state.searchTerm = '';
-    searchInput.value = '';
-    clearSearchBtn.hidden = true;
-    document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('#category-filters [data-category="all"]').classList.add('active');
-    document.querySelector('#platform-filters [data-platform="all"]').classList.add('active');
-    renderGamesGrid();
-  });
+  document.getElementById('modal-direct-buy-btn').addEventListener('click', () => {
+    if (!validateModalForm(game)) return;
+    
+    const orderRef = '#KASAR-' + Math.floor(100000 + Math.random() * 900000);
+    const now = new Date();
+    const dateStr = now.toLocaleDateString();
 
-  // Hero Buttons
-  document.getElementById('hero-buy-btn').addEventListener('click', () => {
-    addToCart('neon-overdrive-2099');
-    openCartDrawer();
-  });
+    const directOrder = {
+      orderRef,
+      dateStr,
+      items: [{
+        cartItemId: `${game.id}_${state.selectedPackage.id}_${state.userIdInput}_${state.zoneIdInput}`,
+        gameId: game.id,
+        gameTitle: game.title,
+        coverImg: game.coverImg,
+        currencyName: game.currencyName,
+        packageId: state.selectedPackage.id,
+        packageName: state.selectedPackage.name,
+        price: state.selectedPackage.price,
+        userId: state.userIdInput,
+        zoneId: state.zoneIdInput,
+        ign: state.verifiedIgn,
+        quantity: 1
+      }],
+      totalAmount: `${state.selectedPackage.price.toLocaleString()} Ks`,
+      status: 'PENDING_PAYMENT',
+      paymentMethod: state.selectedPayment
+    };
 
-  document.getElementById('hero-quick-btn').addEventListener('click', () => {
-    openQuickView('neon-overdrive-2099');
-  });
-
-  // Cart Drawer Triggers
-  document.getElementById('cart-btn').addEventListener('click', openCartDrawer);
-  document.getElementById('close-cart-btn').addEventListener('click', closeCartDrawer);
-  document.getElementById('cart-backdrop').addEventListener('click', closeCartDrawer);
-
-  // Promo Code
-  document.getElementById('apply-promo-btn').addEventListener('click', applyPromoCode);
-
-  // Copy Promo Code in Top Announcement Bar
-  document.getElementById('copy-code-btn').addEventListener('click', () => {
-    navigator.clipboard.writeText('CYBER2099');
-    showToast('Promo Code CYBER2099 copied to clipboard!');
-  });
-
-  // Checkout Button
-  document.getElementById('checkout-btn').addEventListener('click', triggerCheckout);
-  document.getElementById('close-checkout-modal').addEventListener('click', closeCheckoutModal);
-  document.getElementById('finish-order-btn').addEventListener('click', closeCheckoutModal);
-
-  // Wishlist Modal Triggers
-  document.getElementById('wishlist-btn').addEventListener('click', openWishlistModal);
-  document.getElementById('view-wishlist-footer').addEventListener('click', (e) => {
-    e.preventDefault();
-    openWishlistModal();
-  });
-  document.getElementById('close-wishlist-modal').addEventListener('click', closeWishlistModal);
-
-  // Quick View Modal Close
-  document.getElementById('close-quick-modal').addEventListener('click', closeQuickModal);
-
-  // Newsletter Form
-  document.getElementById('newsletter-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('newsletter-email').value;
-    showToast(`Access granted! Subscribed ${email} to Netrunner Dispatch.`, 'cyan');
-    document.getElementById('newsletter-email').value = '';
+    closeTopUpModal();
+    openPaymentQRModal(directOrder);
   });
 }
 
-// ==========================================================================
-// 6. CART MANAGEMENT
-// ==========================================================================
-function addToCart(gameId) {
-  const game = GAMES_DATA.find(g => g.id === gameId);
-  if (!game) return;
+function validateModalForm(game) {
+  const userIdInput = document.getElementById('modal-user-id');
+  const zoneIdInput = document.getElementById('modal-zone-id');
+  const userId = userIdInput ? userIdInput.value.trim() : '';
+  const zoneId = zoneIdInput ? zoneIdInput.value.trim() : '';
 
-  const existingItem = state.cart.find(item => item.id === gameId);
-  if (existingItem) {
-    existingItem.qty += 1;
-  } else {
-    state.cart.push({ ...game, qty: 1 });
+  if (!userId) {
+    showToast('Please enter Player ID.', 'error');
+    return false;
   }
 
+  state.userIdInput = userId;
+  state.zoneIdInput = zoneId;
+  if (!state.verifiedIgn) {
+    state.verifiedIgn = game.sampleIgn + "_" + userId.slice(-3);
+  }
+  return true;
+}
+
+function addToCart(game, pkg, userId, zoneId, ign) {
+  state.cart.push({
+    cartItemId: `${game.id}_${pkg.id}_${userId}_${zoneId}`,
+    gameId: game.id,
+    gameTitle: game.title,
+    coverImg: game.coverImg,
+    packageName: pkg.name,
+    price: pkg.price,
+    userId,
+    zoneId,
+    ign,
+    quantity: 1
+  });
+
   saveCart();
-  renderGamesGrid();
-  showToast(`Added ${game.title} to your Cyber Cart!`, 'cyan');
+  showToast(`Added to cart!`, 'success');
 }
 
 function updateCartBadge() {
-  const totalCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById('cart-count').textContent = totalCount;
-  document.getElementById('cart-items-count').textContent = totalCount;
-  renderCartItems();
+  const countEl = document.getElementById('cart-count');
+  const totalItems = state.cart.length;
+
+  if (countEl) countEl.textContent = totalItems;
 }
 
 function renderCartItems() {
   const container = document.getElementById('cart-items-container');
   const checkoutBtn = document.getElementById('checkout-btn');
+  const totalEl = document.getElementById('cart-total');
+
+  if (!container) return;
 
   if (state.cart.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:40px 10px; color:var(--text-muted);">
-        <i class="fa-solid fa-cart-arrow-down" style="font-size:2.5rem; color:var(--primary-cyan); margin-bottom:12px;"></i>
-        <p>Your cyber cart is empty.</p>
-      </div>
-    `;
-    checkoutBtn.disabled = true;
-    updateCartTotals();
+    container.innerHTML = `<p class="empty-cart-text" style="text-align:center; color:#8899b0; padding:20px 0;">Cart is empty.</p>`;
+    if (checkoutBtn) checkoutBtn.disabled = true;
+    if (totalEl) totalEl.textContent = '0 Ks';
     return;
   }
 
-  checkoutBtn.disabled = false;
-  container.innerHTML = state.cart.map(item => `
-    <div class="cart-item">
-      <img src="${item.coverImg}" alt="${item.title}" class="cart-item-img">
-      <div class="cart-item-info">
-        <h4 class="cart-item-title">${item.title}</h4>
-        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-        <div class="cart-item-qty">
-          <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
-          <span>${item.qty}</span>
-          <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+  if (checkoutBtn) checkoutBtn.disabled = false;
+
+  let subtotal = 0;
+  container.innerHTML = state.cart.map((item, idx) => {
+    subtotal += item.price;
+    return `
+      <div class="cart-item-row" style="display:flex; gap:8px; margin-bottom:8px; background:rgba(14,20,34,0.8); padding:8px; border-radius:6px;">
+        <div class="cart-item-details" style="flex-grow:1; font-size:0.85rem;">
+          <strong>${item.gameTitle}</strong>
+          <div>${item.packageName} (ID: ${item.userId})</div>
+          <div style="color:#00f0ff">${item.price.toLocaleString()} Ks</div>
         </div>
+        <button class="remove-item-btn" onclick="removeFromCart(${idx})" style="background:none; border:none; color:#ff007a; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
       </div>
-      <button class="remove-item-btn" onclick="removeFromCart('${item.id}')" title="Remove Item">
-        <i class="fa-solid fa-trash-can"></i>
-      </button>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
-  updateCartTotals();
+  if (totalEl) totalEl.textContent = `${subtotal.toLocaleString()} Ks`;
 }
 
-function changeQty(gameId, delta) {
-  const item = state.cart.find(i => i.id === gameId);
-  if (!item) return;
-
-  item.qty += delta;
-  if (item.qty <= 0) {
-    removeFromCart(gameId);
-  } else {
-    saveCart();
-  }
-}
-
-function removeFromCart(gameId) {
-  state.cart = state.cart.filter(item => item.id !== gameId);
+function removeFromCart(idx) {
+  state.cart.splice(idx, 1);
   saveCart();
-  renderGamesGrid();
-  showToast('Item removed from cart.', 'magenta');
-}
-
-function updateCartTotals() {
-  const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  let discountAmount = 0;
-
-  if (state.appliedPromo === 'CYBER2099') {
-    discountAmount = subtotal * 0.20;
-    document.getElementById('discount-row').hidden = false;
-    document.getElementById('cart-discount').textContent = `-$${discountAmount.toFixed(2)}`;
-  } else {
-    document.getElementById('discount-row').hidden = true;
-  }
-
-  const grandTotal = subtotal - discountAmount;
-  document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-  document.getElementById('cart-total').textContent = `$${grandTotal.toFixed(2)}`;
-}
-
-function applyPromoCode() {
-  const codeInput = document.getElementById('promo-input');
-  const code = codeInput.value.trim().toUpperCase();
-  const msgEl = document.getElementById('promo-msg');
-
-  if (code === 'CYBER2099') {
-    state.appliedPromo = 'CYBER2099';
-    msgEl.style.color = 'var(--accent-green)';
-    msgEl.textContent = '✓ 20% Cyber Discount Applied!';
-    updateCartTotals();
-    showToast('20% Discount Code Applied!', 'cyan');
-  } else {
-    msgEl.style.color = 'var(--primary-magenta)';
-    msgEl.textContent = '✕ Invalid Promo Code. Try CYBER2099';
-  }
+  renderCartItems();
 }
 
 function openCartDrawer() {
-  document.getElementById('cart-drawer').classList.add('active');
-  document.getElementById('cart-backdrop').classList.add('active');
+  const drawer = document.getElementById('cart-drawer');
+  const backdrop = document.getElementById('cart-backdrop');
+  if (drawer && backdrop) {
+    renderCartItems();
+    drawer.classList.add('active');
+    backdrop.classList.add('active');
+  }
 }
 
 function closeCartDrawer() {
-  document.getElementById('cart-drawer').classList.remove('active');
-  document.getElementById('cart-backdrop').classList.remove('active');
-}
-
-// ==========================================================================
-// 7. WISHLIST MANAGEMENT
-// ==========================================================================
-function toggleWishlist(gameId) {
-  const index = state.wishlist.findIndex(w => w.id === gameId);
-  const game = GAMES_DATA.find(g => g.id === gameId);
-
-  if (index >= 0) {
-    state.wishlist.splice(index, 1);
-    showToast(`Removed ${game.title} from Wishlist.`, 'magenta');
-  } else {
-    state.wishlist.push(game);
-    showToast(`Saved ${game.title} to your Wishlist!`, 'cyan');
+  const drawer = document.getElementById('cart-drawer');
+  const backdrop = document.getElementById('cart-backdrop');
+  if (drawer && backdrop) {
+    drawer.classList.remove('active');
+    backdrop.classList.remove('active');
   }
-
-  saveWishlist();
-  renderGamesGrid();
 }
 
-function updateWishlistBadge() {
-  document.getElementById('wishlist-count').textContent = state.wishlist.length;
+function processCheckout() {
+  if (state.cart.length === 0) return;
+
+  const orderRef = '#KASAR-' + Math.floor(100000 + Math.random() * 900000);
+  const now = new Date();
+  const dateStr = now.toLocaleDateString();
+
+  const cartOrder = {
+    orderRef,
+    dateStr,
+    items: [...state.cart],
+    totalAmount: document.getElementById('cart-total').textContent,
+    status: 'PENDING_PAYMENT',
+    paymentMethod: state.selectedPayment
+  };
+
+  closeCartDrawer();
+  openPaymentQRModal(cartOrder);
 }
 
-function openWishlistModal() {
-  const container = document.getElementById('wishlist-items-container');
-  if (state.wishlist.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:40px; color:var(--text-muted);">
-        <i class="fa-solid fa-heart-crack" style="font-size:3rem; color:var(--primary-magenta); margin-bottom:12px;"></i>
-        <p>Your wishlist is empty. Explore the catalog to save titles!</p>
+function openPaymentQRModal(order) {
+  state.currentPendingOrder = order;
+
+  const backdrop = document.getElementById('qr-modal-backdrop');
+  const content = document.getElementById('qr-modal-content');
+  if (!backdrop || !content) return;
+
+  const payInfo = PAYMENT_METHODS.find(p => p.id === order.paymentMethod) || PAYMENT_METHODS[0];
+
+  content.innerHTML = `
+    <div class="qr-modal-wrapper">
+      <div class="qr-modal-header" style="padding:14px; background:#0e1422; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
+        <h2><i class="${payInfo.icon}"></i> SCAN QR CODE</h2>
+        <button class="modal-close" onclick="closePaymentQRModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
-    `;
-  } else {
-    container.innerHTML = state.wishlist.map(game => `
-      <div class="cart-item" style="margin-bottom:12px;">
-        <img src="${game.coverImg}" alt="${game.title}" class="cart-item-img">
-        <div class="cart-item-info">
-          <h4 class="cart-item-title">${game.title}</h4>
-          <div class="cart-item-price">$${game.price.toFixed(2)}</div>
-        </div>
-        <button class="btn btn-primary btn-sm" onclick="addToCart('${game.id}'); closeWishlistModal(); openCartDrawer();">
-          Move to Cart
-        </button>
-        <button class="remove-item-btn" onclick="toggleWishlist('${game.id}'); openWishlistModal();" style="margin-left:12px;">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-    `).join('');
-  }
 
-  document.getElementById('wishlist-modal-backdrop').classList.add('active');
-}
-
-function closeWishlistModal() {
-  document.getElementById('wishlist-modal-backdrop').classList.remove('active');
-}
-
-// ==========================================================================
-// 8. QUICK VIEW MODAL
-// ==========================================================================
-function openQuickView(gameId) {
-  const game = GAMES_DATA.find(g => g.id === gameId);
-  if (!game) return;
-
-  const contentEl = document.getElementById('quick-modal-content');
-  contentEl.innerHTML = `
-    <div class="quick-view-grid">
-      <div>
-        <img src="${game.coverImg}" alt="${game.title}" class="quick-view-img">
-      </div>
-      <div class="quick-view-details">
-        <span class="card-category">${game.category.toUpperCase()}</span>
-        <h2>${game.title}</h2>
-        <div class="card-rating" style="margin-bottom:16px;">
-          <i class="fa-solid fa-star"></i>
-          <span>${game.rating} / 5.0</span> (${game.reviewsCount} Netrunner Reviews)
-        </div>
-        <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.6;">${game.description}</p>
-        
-        <div class="specs-box">
-          <h4 style="color:var(--primary-cyan); margin-bottom:8px;"><i class="fa-solid fa-microchip"></i> Recommended System Specs</h4>
-          <p><strong>OS:</strong> ${game.specs.os}</p>
-          <p><strong>CPU:</strong> ${game.specs.processor}</p>
-          <p><strong>GPU:</strong> ${game.specs.graphics}</p>
-          <p><strong>Storage:</strong> ${game.specs.storage}</p>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
-          <div style="font-family:var(--font-heading); font-size:1.6rem; color:#fff;">
-            $${game.price.toFixed(2)}
+      <div class="qr-modal-body">
+        <div class="qr-code-section" style="display:flex; flex-direction:column; align-items:center;">
+          <div class="qr-frame-box">
+            <div class="qr-scan-line"></div>
+            ${generateCyberQRCodeSVG(payInfo)}
           </div>
-          <button class="btn btn-primary" onclick="addToCart('${game.id}'); closeQuickModal(); openCartDrawer();">
-            <i class="fa-solid fa-cart-plus"></i> ADD TO CART
-          </button>
+          <div class="qr-timer-box" style="margin-top:6px; font-size:0.8rem;">Closing in <strong id="qr-countdown" style="color:#ffb700;">09:59</strong></div>
         </div>
+
+        <div class="qr-details-section">
+          <div class="merchant-info-card">
+            <div>Account: <strong>${payInfo.accountName}</strong></div>
+            <div class="copy-field">
+              No: <strong>${payInfo.accountNo}</strong>
+              <button class="copy-btn" onclick="copyTextToClipboard('${payInfo.accountNo}')"><i class="fa-solid fa-copy"></i></button>
+            </div>
+            <div class="copy-field">
+              Ref: <strong style="color:#00f0ff;">${order.orderRef}</strong>
+              <button class="copy-btn" onclick="copyTextToClipboard('${order.orderRef}')"><i class="fa-solid fa-copy"></i></button>
+            </div>
+            <div>Total: <strong style="color:#ffb700;">${order.totalAmount}</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qr-modal-footer">
+        <button class="btn btn-secondary" onclick="closePaymentQRModal()">CANCEL</button>
+        <button class="btn btn-primary" id="confirm-payment-btn" onclick="confirmQRPaymentSubmitted()">
+          <i class="fa-solid fa-check"></i> I HAVE PAID
+        </button>
       </div>
     </div>
   `;
 
-  document.getElementById('quick-modal-backdrop').classList.add('active');
+  backdrop.classList.add('active');
+  startQRCountdownTimer();
 }
 
-function closeQuickModal() {
-  document.getElementById('quick-modal-backdrop').classList.remove('active');
+function closePaymentQRModal() {
+  const backdrop = document.getElementById('qr-modal-backdrop');
+  if (backdrop) backdrop.classList.remove('active');
+  if (state.qrTimerInterval) clearInterval(state.qrTimerInterval);
 }
 
-// ==========================================================================
-// 9. CHECKOUT SIMULATION
-// ==========================================================================
-function triggerCheckout() {
-  if (state.cart.length === 0) return;
+function startQRCountdownTimer() {
+  if (state.qrTimerInterval) clearInterval(state.qrTimerInterval);
+  let totalSeconds = 599;
+  const timerEl = document.getElementById('qr-countdown');
 
-  closeCartDrawer();
-  const summaryList = document.getElementById('checkout-summary-list');
-  const refId = `#CYBER-${Math.floor(100000 + Math.random() * 900000)}`;
-  document.getElementById('order-ref-id').textContent = refId;
+  state.qrTimerInterval = setInterval(() => {
+    if (totalSeconds <= 0) {
+      clearInterval(state.qrTimerInterval);
+      return;
+    }
+    totalSeconds--;
+    const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const secs = (totalSeconds % 60).toString().padStart(2, '0');
+    if (timerEl) timerEl.textContent = `${mins}:${secs}`;
+  }, 1000);
+}
 
-  summaryList.innerHTML = state.cart.map(item => `
-    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.9rem;">
-      <span>${item.qty}x ${item.title}</span>
-      <span style="color:var(--primary-cyan); font-family:var(--font-heading);">$${(item.price * item.qty).toFixed(2)}</span>
-    </div>
-  `).join('');
+function generateCyberQRCodeSVG(payInfo) {
+  return `
+    <svg class="cyber-qr-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="200" fill="#070a10" rx="6"/>
+      <rect x="15" y="15" width="40" height="40" fill="none" stroke="#00f0ff" stroke-width="4"/>
+      <rect x="25" y="25" width="20" height="20" fill="#00f0ff"/>
+      <rect x="145" y="15" width="40" height="40" fill="none" stroke="#ff007a" stroke-width="4"/>
+      <rect x="155" y="25" width="20" height="20" fill="#ff007a"/>
+      <rect x="15" y="145" width="40" height="40" fill="none" stroke="#00f0ff" stroke-width="4"/>
+      <rect x="25" y="155" width="20" height="20" fill="#00f0ff"/>
+      <g fill="#00f0ff" opacity="0.85">
+        <rect x="65" y="15" width="10" height="10"/><rect x="80" y="15" width="10" height="10"/>
+        <rect x="85" y="65" width="30" height="10"/>
+      </g>
+      <rect x="75" y="75" width="50" height="50" fill="#070a10" stroke="${payInfo.color}" stroke-width="2" rx="6"/>
+      <text x="100" y="105" fill="${payInfo.color}" font-family="Inter, sans-serif" font-size="9" font-weight="bold" text-anchor="middle">ITEMMANIA</text>
+    </svg>
+  `;
+}
 
-  // Clear cart upon purchase
+function copyTextToClipboard(text) {
+  navigator.clipboard.writeText(text);
+  showToast('Copied to clipboard!', 'info');
+}
+
+function confirmQRPaymentSubmitted() {
+  if (!state.currentPendingOrder) return;
+  const completedOrder = {
+    ...state.currentPendingOrder,
+    status: 'COMPLETED ✅'
+  };
+
+  state.recentOrders.unshift(completedOrder);
+  saveOrders();
   state.cart = [];
   saveCart();
-  renderGamesGrid();
 
-  document.getElementById('checkout-modal-backdrop').classList.add('active');
+  closePaymentQRModal();
+  openReceiptModal(completedOrder);
+}
+
+function openReceiptModal(order) {
+  const backdrop = document.getElementById('checkout-modal-backdrop');
+  const refEl = document.getElementById('order-ref-id');
+  const summaryBox = document.getElementById('checkout-summary-list');
+  if (!backdrop) return;
+
+  if (refEl) refEl.textContent = order.orderRef;
+  if (summaryBox) {
+    summaryBox.innerHTML = `
+      <div style="font-size:0.85rem; color:#00e676; margin-top:8px;">
+        <i class="fa-solid fa-check"></i> TOP-UP DISPATCHED DIRECTLY
+      </div>
+      <div style="font-size:0.8rem; color:#8899b0; margin-top:4px;">Ref: ${order.orderRef} | Total: ${order.totalAmount}</div>
+    `;
+  }
+  backdrop.classList.add('active');
 }
 
 function closeCheckoutModal() {
-  document.getElementById('checkout-modal-backdrop').classList.remove('active');
+  const backdrop = document.getElementById('checkout-modal-backdrop');
+  if (backdrop) backdrop.classList.remove('active');
 }
 
-// ==========================================================================
-// 10. TOAST NOTIFICATIONS
-// ==========================================================================
-function showToast(message, theme = 'cyan') {
-  const container = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = `toast ${theme === 'magenta' ? 'toast-magenta' : ''}`;
-  toast.innerHTML = `
-    <i class="fa-solid fa-circle-check" style="color:${theme === 'magenta' ? 'var(--primary-magenta)' : 'var(--primary-cyan)'}"></i>
-    <span>${message}</span>
-  `;
+function openOrderTrackerModal() {
+  const backdrop = document.getElementById('tracker-modal-backdrop');
+  if (backdrop) {
+    backdrop.classList.add('active');
+    renderRecentOrdersList();
+  }
+}
 
+function closeOrderTrackerModal() {
+  const backdrop = document.getElementById('tracker-modal-backdrop');
+  if (backdrop) backdrop.classList.remove('active');
+}
+
+function renderRecentOrdersList() {
+  const container = document.getElementById('tracker-results-container');
+  if (!container) return;
+
+  if (state.recentOrders.length === 0) {
+    container.innerHTML = `<p style="text-align:center; padding:20px; color:#8899b0; font-size:0.85rem;">No recent orders found.</p>`;
+    return;
+  }
+
+  container.innerHTML = state.recentOrders.map(ord => `
+    <div style="background:#0e1422; padding:10px; border-radius:6px; margin-bottom:8px; font-size:0.8rem;">
+      <div><strong>${ord.orderRef}</strong> - <span style="color:#00e676;">${ord.status}</span></div>
+      <div>Total: ${ord.totalAmount}</div>
+    </div>
+  `).join('');
+}
+
+function searchOrderRef() {
+  const searchInput = document.getElementById('tracker-search-input');
+  if (!searchInput) return;
+  const query = searchInput.value.trim().toUpperCase();
+  const container = document.getElementById('tracker-results-container');
+
+  const found = state.recentOrders.filter(o => o.orderRef.includes(query));
+  if (found.length === 0) {
+    container.innerHTML = `<p style="padding:10px; color:#8899b0; font-size:0.8rem;">No order found matching "${query}".</p>`;
+  } else {
+    container.innerHTML = found.map(ord => `
+      <div style="background:#0e1422; padding:10px; border-radius:6px; margin-bottom:8px; font-size:0.8rem;">
+        <div><strong>${ord.orderRef}</strong> - <span style="color:#00e676;">${ord.status}</span></div>
+        <div>Total: ${ord.totalAmount}</div>
+      </div>
+    `).join('');
+  }
+}
+
+function openSupportModal() {
+  const backdrop = document.getElementById('support-modal-backdrop');
+  if (backdrop) backdrop.classList.add('active');
+}
+
+function closeSupportModal() {
+  const backdrop = document.getElementById('support-modal-backdrop');
+  if (backdrop) backdrop.classList.remove('active');
+}
+
+function toggleMobileMenu() {
+  const navMenu = document.getElementById('nav-menu');
+  if (navMenu) navMenu.classList.toggle('mobile-active');
+}
+
+function setupEventListeners() {
+  const mobileToggleBtn = document.getElementById('mobile-toggle');
+  if (mobileToggleBtn) mobileToggleBtn.addEventListener('click', toggleMobileMenu);
+
+  const catButtons = document.querySelectorAll('#category-filters .pill-btn');
+  catButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.activeCategory = btn.getAttribute('data-category');
+      renderGamesGrid();
+    });
+  });
+
+  const searchInput = document.getElementById('global-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.searchTerm = e.target.value;
+      renderGamesGrid();
+    });
+  }
+
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+
+  const cartBtn = document.getElementById('cart-btn');
+  const closeCartBtn = document.getElementById('close-cart-btn');
+  if (cartBtn) cartBtn.addEventListener('click', openCartDrawer);
+  if (closeCartBtn) closeCartBtn.addEventListener('click', closeCartDrawer);
+
+  const checkoutBtn = document.getElementById('checkout-btn');
+  if (checkoutBtn) checkoutBtn.addEventListener('click', processCheckout);
+
+  const trackBtn = document.getElementById('track-order-btn');
+  if (trackBtn) trackBtn.addEventListener('click', openOrderTrackerModal);
+
+  const supportBtn = document.getElementById('support-btn');
+  if (supportBtn) supportBtn.addEventListener('click', openSupportModal);
+}
+
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `cyber-toast toast-${type}`;
+  toast.innerHTML = `<span>${message}</span>`;
   container.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('show'), 10);
   setTimeout(() => {
-    toast.style.animation = 'slideIn 0.3s ease reverse forwards';
+    toast.classList.remove('show');
     setTimeout(() => toast.remove(), 300);
-  }, 3000);
+  }, 2500);
 }
