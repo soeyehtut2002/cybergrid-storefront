@@ -1020,6 +1020,19 @@ function setupEventListeners() {
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
 
+  // Global Ctrl + K search shortcut listener
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      const globalSearchInput = document.getElementById('global-search-input');
+      if (globalSearchInput) {
+        globalSearchInput.focus();
+        globalSearchInput.select();
+      }
+    }
+  });
+  if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+
   const cartBtn = document.getElementById('cart-btn');
   const closeCartBtn = document.getElementById('close-cart-btn');
   if (cartBtn) cartBtn.addEventListener('click', openCartDrawer);

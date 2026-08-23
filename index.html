@@ -97,6 +97,7 @@
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
           <input type="text" id="global-search-input" placeholder="Search game..." autocomplete="off">
+          <kbd class="search-kbd">Ctrl K</kbd>
         </div>
 
         <button class="icon-btn cart-trigger-btn" id="cart-btn" title="View Cart">
@@ -106,6 +107,10 @@
 
         <button class="icon-btn theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light / Dark Mode">
           <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+
+        <button class="btn-nav-quick-refill" onclick="document.getElementById('store').scrollIntoView({behavior: 'smooth'})" title="Quick Top-Up">
+          <i class="fa-solid fa-bolt-lightning"></i> <span>REFILL</span>
         </button>
 
         <button class="mobile-toggle" id="mobile-toggle">
