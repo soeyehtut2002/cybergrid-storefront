@@ -973,6 +973,18 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
   html { font-size: 14px; }
+
+  /* Prevent iOS Safari Auto-Zoom on Input Focus (Game ID, Password, Search) */
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="email"],
+  select,
+  textarea,
+  .cyber-input {
+    font-size: 16px !important;
+  }
+
   .navbar { top: 6px; padding: 0 8px; margin-bottom: 6px; }
   .nav-container { padding: 8px 12px; gap: 8px; }
   .brand-logo { gap: 8px; }
