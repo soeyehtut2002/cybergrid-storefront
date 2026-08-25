@@ -11,6 +11,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
+// PWA App Icon Fallbacks
+app.get(['/assets/icon-192.png', '/assets/icon-512.png', '/apple-touch-icon.png', '/apple-touch-icon-precomposed.png'], (req, res) => {
+  const iconPath = path.join(__dirname, 'assets', 'icon.svg');
+  if (require('fs').existsSync(iconPath)) {
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.sendFile(iconPath);
+  } else {
+    res.sendStatus(404);
+  }
+});
+
 // Neon PostgreSQL Connection Pool
 const databaseUrl = process.env.DATABASE_URL;
 let pool = null;

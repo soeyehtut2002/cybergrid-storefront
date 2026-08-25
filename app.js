@@ -271,6 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
   setupEventListeners();
   triggerWelcomePromoModal();
+
+  // Register PWA Service Worker for Add to Home Screen & Web App mode
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('⚡ PWA Service Worker Registered:', reg.scope))
+      .catch(err => console.log('PWA Service Worker offline fallback mode:', err));
+  }
 });
 
 // BIG ANIMATED HERO BANNER CAROUSEL
