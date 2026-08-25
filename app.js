@@ -192,6 +192,7 @@ let state = {
   recentOrders: JSON.parse(localStorage.getItem('kasaryar_orders')) || [],
   activeCategory: 'all',
   searchTerm: '',
+  currentLang: localStorage.getItem('kasaryar_lang') || 'en',
 
   currentHeroSlide: 0,
   heroAutoplayTimer: null,
@@ -208,19 +209,92 @@ let state = {
   welcomeTimerInterval: null
 };
 
-function saveCart() {
-  localStorage.setItem('kasaryar_topup_cart', JSON.stringify(state.cart));
-  updateCartBadge();
+// INTERNATIONALIZATION (i18n) DICTIONARY
+const TRANSLATIONS = {
+  en: {
+    nav_home: "Home",
+    nav_topup: "Top-Up",
+    nav_payment: "Payment",
+    nav_tracker: "Tracker",
+    nav_support: "Support",
+    nav_cart: "Cart",
+    search_placeholder: "Search game...",
+    quick_refill: "REFILL",
+    browse_title: "BROWSE & <span class=\"text-cyan\">SELECT GAME</span>",
+    browse_sub: "Select your game to refill instantly with instant 0-sec delivery.",
+    secure_gateways: "<i class=\"fa-solid fa-shield-halved text-green\"></i> 100% SECURE GATEWAYS:",
+    cat_all: "All Games",
+    cat_moba: "MOBA",
+    cat_br: "Battle Royale",
+    cat_rpg: "Gacha / RPG",
+    cat_fps: "Tactical FPS",
+    cat_gift: "Gift Cards",
+    lang_label: "မြန်မာဘာသာ 🇲🇲",
+    lang_flag: "🇲🇲"
+  },
+  my: {
+    nav_home: "ပင်မစာမျက်နှာ",
+    nav_topup: "ဂိမ်းငွေဖြည့်",
+    nav_payment: "ငွေပေးချေမှု",
+    nav_tracker: "အော်ဒါစစ်ဆေးမည်",
+    nav_support: "အကူအညီ",
+    nav_cart: "ဈေးဝယ်လှည်း",
+    search_placeholder: "ဂိမ်းအမည် ရှာပါ...",
+    quick_refill: "မြန်ဆန်စွာဖြည့်မည်",
+    browse_title: "ဂိမ်းများ <span class=\"text-cyan\">ရွေးချယ်ပါ</span>",
+    browse_sub: "(၀) စက္ကန့်အတွင်း ဂိမ်းငွေ ချက်ချင်း ဖြည့်ယူလိုက်ပါ",
+    secure_gateways: "<i class=\"fa-solid fa-shield-halved text-green\"></i> ၁၀၀% စိတ်ချရသော ငွေပေးချေစနစ်များ:",
+    cat_all: "ဂိမ်းအားလုံး",
+    cat_moba: "MOBA ဂိမ်းများ",
+    cat_br: "Battle Royale",
+    cat_rpg: "Gacha / RPG",
+    cat_fps: "Tactical FPS",
+    cat_gift: "Gift Cards",
+    lang_label: "English Language 🇬🇧",
+    lang_flag: "🇬🇧"
+  }
+};
+
+function initLanguage() {
+  const savedLang = localStorage.getItem('kasaryar_lang') || 'en';
+  setLanguage(savedLang, false);
 }
 
-function saveOrders() {
-  localStorage.setItem('kasaryar_orders', JSON.stringify(state.recentOrders));
+function setLanguage(lang, showNotification = true) {
+  state.currentLang = lang;
+  localStorage.setItem('kasaryar_lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+
+  const mobileLabel = document.getElementById('mobile-lang-label');
+  const mobileFlag = document.getElementById('mobile-lang-flag');
+
+  if (mobileLabel && mobileFlag) {
+    mobileFlag.textContent = t.lang_flag;
+    mobileLabel.textContent = t.lang_label;
+  }
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.innerHTML = t[key];
+    }
+  });
+
+  const searchInput = document.getElementById('global-search-input');
+  if (searchInput && t.search_placeholder) {
+    searchInput.placeholder = t.search_placeholder;
+  }
+
+  if (showNotification) {
+    showToast(lang === 'my' ? 'မြန်မာဘာသာသို့ ပြောင်းလဲလိုက်ပါပြီ 🇲🇲' : 'Switched to English Language 🇬🇧', 'success');
+  }
 }
 
-// THEME MANAGEMENT (LIGHT & DARK MODE)
-function initTheme() {
-  const savedTheme = localStorage.getItem('kasaryar_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  setTheme(savedTheme, false);
+function toggleLanguage() {
+  const newLang = state.currentLang === 'en' ? 'my' : 'en';
+  setLanguage(newLang, true);
 }
 
 function setTheme(theme, showNotification = true) {
@@ -259,11 +333,13 @@ function toggleTheme() {
   setTheme(newTheme, true);
 }
 
-// Initialize theme immediately
+// Initialize theme & language immediately
 initTheme();
+initLanguage();
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
+  initLanguage();
   renderHeroBanners();
   startHeroBannerAutoplay();
 
