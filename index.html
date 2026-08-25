@@ -86,18 +86,22 @@
       </a>
 
       <nav class="nav-menu" id="nav-menu">
-        <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#store" class="nav-link"><i class="fa-solid fa-gem"></i> Top-Up</a>
-        <a href="#deals" class="nav-link"><i class="fa-solid fa-wallet"></i> Payment</a>
-        <a href="#" class="nav-link" id="track-order-btn"><i class="fa-solid fa-truck-fast"></i> Tracker</a>
-        <a href="#" class="nav-link" id="support-btn"><i class="fa-solid fa-headset"></i> Support</a>
+        <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Home</span></a>
+        <a href="#store" class="nav-link"><i class="fa-solid fa-gem"></i> <span data-i18n="nav_topup">Top-Up</span></a>
+        <a href="#deals" class="nav-link"><i class="fa-solid fa-wallet"></i> <span data-i18n="nav_payment">Payment</span></a>
+        <a href="#" class="nav-link" id="track-order-btn"><i class="fa-solid fa-truck-fast"></i> <span data-i18n="nav_tracker">Tracker</span></a>
+        <a href="#" class="nav-link" id="support-btn"><i class="fa-solid fa-headset"></i> <span data-i18n="nav_support">Support</span></a>
         <button class="nav-link mobile-cart-link" id="mobile-cart-btn" onclick="openCartDrawer()">
           <i class="fa-solid fa-cart-shopping text-cyan"></i>
-          <span>Cart (<strong id="mobile-cart-count">0</strong>)</span>
+          <span><span data-i18n="nav_cart">Cart</span> (<strong id="mobile-cart-count">0</strong>)</span>
         </button>
         <button class="nav-link mobile-theme-link" id="mobile-theme-btn" onclick="toggleTheme()">
           <i class="fa-solid fa-moon text-cyan" id="mobile-theme-icon"></i>
           <span id="mobile-theme-label">Dark Mode 🌙</span>
+        </button>
+        <button class="nav-link mobile-lang-link" id="mobile-lang-btn" onclick="toggleLanguage()">
+          <span class="flag-icon" id="mobile-lang-flag">🇲🇲</span>
+          <span id="mobile-lang-label">မြန်မာဘာသာ 🇲🇲</span>
         </button>
       </nav>
 
@@ -107,6 +111,11 @@
           <input type="text" id="global-search-input" placeholder="Search game..." autocomplete="off">
           <kbd class="search-kbd">Ctrl K</kbd>
         </div>
+
+        <button class="lang-toggle-btn" id="lang-toggle-btn" onclick="toggleLanguage()" title="Switch Language (EN / MY)">
+          <span class="flag-icon" id="desktop-lang-flag">🇲🇲</span>
+          <span class="lang-text" id="desktop-lang-text">မြန်မာ</span>
+        </button>
 
         <button class="icon-btn cart-trigger-btn" id="cart-btn" title="View Cart">
           <i class="fa-solid fa-cart-shopping"></i>
@@ -118,7 +127,7 @@
         </button>
 
         <button class="btn-nav-quick-refill" onclick="document.getElementById('store').scrollIntoView({behavior: 'smooth'})" title="Quick Top-Up">
-          <i class="fa-solid fa-bolt-lightning"></i> <span>REFILL</span>
+          <i class="fa-solid fa-bolt-lightning"></i> <span data-i18n="quick_refill">REFILL</span>
         </button>
 
         <button class="mobile-toggle" id="mobile-toggle">
@@ -149,8 +158,8 @@
     <div class="section-container">
       <div class="section-header">
         <div>
-          <h2 class="section-title">BROWSE & <span class="text-cyan">SELECT GAME</span></h2>
-          <p class="section-subtitle">Select your game to refill instantly with instant 0-sec delivery.</p>
+          <h2 class="section-title" data-i18n="browse_title">BROWSE & <span class="text-cyan">SELECT GAME</span></h2>
+          <p class="section-subtitle" data-i18n="browse_sub">Select your game to refill instantly with instant 0-sec delivery.</p>
         </div>
 
         <div class="slider-controls">
@@ -161,7 +170,7 @@
 
       <!-- Trust Payment Badges Row -->
       <div class="store-trust-row">
-        <span class="trust-label"><i class="fa-solid fa-shield-halved text-green"></i> 100% SECURE GATEWAYS:</span>
+        <span class="trust-label" data-i18n="secure_gateways"><i class="fa-solid fa-shield-halved text-green"></i> 100% SECURE GATEWAYS:</span>
         <div class="payment-badges-row">
           <div class="pay-chip"><i class="fa-solid fa-wallet text-cyan"></i> KBZPay</div>
           <div class="pay-chip"><i class="fa-solid fa-mobile-screen-button text-yellow"></i> WavePay</div>
@@ -174,12 +183,12 @@
       <!-- Filter Pills -->
       <div class="filter-bar">
         <div class="filter-pills" id="category-filters">
-          <button class="pill-btn active" data-category="all">All Games</button>
-          <button class="pill-btn" data-category="MOBA">MOBA</button>
-          <button class="pill-btn" data-category="Battle Royale">Battle Royale</button>
-          <button class="pill-btn" data-category="Gacha / RPG">Gacha / RPG</button>
-          <button class="pill-btn" data-category="Tactical FPS">Tactical FPS</button>
-          <button class="pill-btn" data-category="Gift Cards">Gift Cards</button>
+          <button class="pill-btn active" data-category="all" data-i18n="cat_all">All Games</button>
+          <button class="pill-btn" data-category="MOBA" data-i18n="cat_moba">MOBA</button>
+          <button class="pill-btn" data-category="Battle Royale" data-i18n="cat_br">Battle Royale</button>
+          <button class="pill-btn" data-category="Gacha / RPG" data-i18n="cat_rpg">Gacha / RPG</button>
+          <button class="pill-btn" data-category="Tactical FPS" data-i18n="cat_fps">Tactical FPS</button>
+          <button class="pill-btn" data-category="Gift Cards" data-i18n="cat_gift">Gift Cards</button>
         </div>
       </div>
 
