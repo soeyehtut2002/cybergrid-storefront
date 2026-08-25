@@ -904,6 +904,25 @@ function confirmQRPaymentSubmitted() {
   state.cart = [];
   saveCart();
 
+  // Asynchronously record order into Neon PostgreSQL DB
+  const firstItem = completedOrder.items && completedOrder.items[0] ? completedOrder.items[0] : {};
+  fetch('/api/orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      orderRef: completedOrder.orderRef,
+      gameId: firstItem.gameId || 'game',
+      gameTitle: firstItem.gameTitle || 'Game TopUp',
+      packageName: firstItem.packageName || 'TopUp Package',
+      userIdInput: firstItem.userId || 'ID',
+      zoneIdInput: firstItem.zoneId || '',
+      paymentMethod: completedOrder.paymentMethod || 'KBZPay',
+      totalAmount: completedOrder.totalAmount
+    })
+  }).then(res => res.json())
+    .then(data => console.log('⚡ Neon DB Order Sync:', data))
+    .catch(err => console.warn('Neon DB sync offline fallback:', err));
+
   closePaymentQRModal();
   openReceiptModal(completedOrder);
 }
@@ -998,6 +1017,13 @@ function toggleMobileMenu() {
 function setupEventListeners() {
   const mobileToggleBtn = document.getElementById('mobile-toggle');
   if (mobileToggleBtn) mobileToggleBtn.addEventListener('click', toggleMobileMenu);
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const navMenu = document.getElementById('nav-menu');
+      if (navMenu) navMenu.classList.remove('mobile-active');
+    });
+  });
 
   const catButtons = document.querySelectorAll('#category-filters .pill-btn');
   catButtons.forEach(btn => {
