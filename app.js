@@ -562,7 +562,8 @@ function buildTopUpModalHTML(game) {
         </div>
 
         <div class="modal-actions-group">
-          <button class="btn btn-primary btn-block" id="modal-direct-buy-btn"><i class="fa-solid fa-qrcode"></i> PAY NOW</button>
+          <button class="btn btn-secondary" id="modal-add-cart-btn">ADD TO CART</button>
+          <button class="btn btn-primary" id="modal-direct-buy-btn"><i class="fa-solid fa-qrcode"></i> PAY NOW</button>
         </div>
       </div>
     </div>
@@ -626,14 +627,11 @@ function setupModalHandlers(game) {
     }, 400);
   });
 
-  const addCartBtn = document.getElementById('modal-add-cart-btn');
-  if (addCartBtn) {
-    addCartBtn.addEventListener('click', () => {
-      if (!validateModalForm(game)) return;
-      addToCart(game, state.selectedPackage, state.userIdInput, state.zoneIdInput, state.verifiedIgn);
-      closeTopUpModal();
-    });
-  }
+  document.getElementById('modal-add-cart-btn').addEventListener('click', () => {
+    if (!validateModalForm(game)) return;
+    addToCart(game, state.selectedPackage, state.userIdInput, state.zoneIdInput, state.verifiedIgn);
+    closeTopUpModal();
+  });
 
   document.getElementById('modal-direct-buy-btn').addEventListener('click', () => {
     if (!validateModalForm(game)) return;
@@ -1057,7 +1055,9 @@ function setupEventListeners() {
       } else {
         backToTopBtn.classList.remove('visible');
       }
+    }
   });
+  if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
 
   const cartBtn = document.getElementById('cart-btn');
   const closeCartBtn = document.getElementById('close-cart-btn');

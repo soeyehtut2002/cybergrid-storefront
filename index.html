@@ -89,6 +89,7 @@
         <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
         <a href="#store" class="nav-link"><i class="fa-solid fa-gem"></i> Top-Up</a>
         <a href="#deals" class="nav-link"><i class="fa-solid fa-wallet"></i> Payment</a>
+        <a href="#" class="nav-link" id="track-order-btn"><i class="fa-solid fa-truck-fast"></i> Tracker</a>
         <a href="#" class="nav-link" id="support-btn"><i class="fa-solid fa-headset"></i> Support</a>
       </nav>
 
@@ -98,6 +99,11 @@
           <input type="text" id="global-search-input" placeholder="Search game..." autocomplete="off">
           <kbd class="search-kbd">Ctrl K</kbd>
         </div>
+
+        <button class="icon-btn cart-trigger-btn" id="cart-btn" title="View Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="badge badge-magenta" id="cart-count">0</span>
+        </button>
 
         <button class="icon-btn theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light / Dark Mode">
           <i class="fa-solid fa-moon" id="theme-icon"></i>
@@ -248,7 +254,7 @@
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="#store">Top-Up</a></li>
-          <li><a href="#deals">Payment</a></li>
+          <li><a href="#" onclick="openOrderTrackerModal()">Tracker</a></li>
         </ul>
       </div>
 
@@ -394,19 +400,29 @@
     </div>
   </div>
 
-  <!-- TOP-UP CONFIGURATOR MODAL -->
-  <div class="modal-backdrop" id="topup-modal-backdrop">
-    <div class="modal-container topup-modal" id="topup-modal">
-      <div id="topup-modal-content"></div>
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-backdrop" id="cart-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping text-cyan"></i> KASARYAR CART (<span id="cart-items-count">0</span>)</h3>
+      <button class="close-drawer-btn" id="close-cart-btn"><i class="fa-solid fa-xmark"></i></button>
     </div>
-  </div>
 
-  <!-- PAYMENT QR CODE MODAL -->
-  <div class="modal-backdrop" id="qr-modal-backdrop">
-    <div class="modal-container qr-modal" id="qr-modal">
-      <div id="qr-modal-content"></div>
+    <div class="drawer-body" id="cart-items-container"></div>
+
+    <div class="drawer-footer">
+      <div class="cart-summary">
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <span class="total-price" id="cart-total">0 Ks</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="checkout-btn" disabled>
+        <i class="fa-solid fa-qrcode"></i> RECHARGE NOW
+      </button>
     </div>
-  </div>
+  </aside>
 
   <!-- Checkout Success & Receipt Modal -->
   <div class="modal-backdrop" id="checkout-modal-backdrop">
@@ -419,6 +435,21 @@
         <div class="order-summary-box" id="checkout-summary-list"></div>
         <button class="btn btn-primary" onclick="closeCheckoutModal()"><i class="fa-solid fa-check"></i> DONE</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Order Status Tracker Modal -->
+  <div class="modal-backdrop" id="tracker-modal-backdrop">
+    <div class="modal-container tracker-modal" id="tracker-modal">
+      <button class="modal-close" onclick="closeOrderTrackerModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="tracker-modal-header">
+        <h2><i class="fa-solid fa-truck-fast text-cyan"></i> ORDER TRACKER</h2>
+        <div class="tracker-search-box">
+          <input type="text" id="tracker-search-input" placeholder="Enter Order Ref #" class="cyber-input">
+          <button class="btn btn-primary" onclick="searchOrderRef()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </div>
+      <div class="tracker-modal-body" id="tracker-results-container"></div>
     </div>
   </div>
 
