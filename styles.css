@@ -350,6 +350,10 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
 }
 
+.mobile-theme-link {
+  display: none;
+}
+
 .icon-btn { 
   background: rgba(255, 255, 255, 0.06); 
   border: 1px solid rgba(255, 255, 255, 0.12); 
@@ -1126,6 +1130,30 @@ h1, h2, h3, h4, h5, h6 {
 
   .btn-nav-quick-refill span { display: none; }
   .btn-nav-quick-refill { padding: 9px 12px; border-radius: 50%; width: 38px; height: 38px; justify-content: center; }
+
+  #theme-toggle-btn { display: none !important; }
+
+  .mobile-theme-link {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 6px;
+    border-radius: 12px;
+    padding: 10px 16px;
+    width: 100%;
+    transition: all 0.2s ease;
+  }
+
+  [data-theme="light"] .mobile-theme-link {
+    background: rgba(15, 23, 42, 0.06);
+    border-color: rgba(15, 23, 42, 0.12);
+  }
 
   .hero-banner-container { aspect-ratio: 12/5.5; min-height: 190px; }
   .cyber-game-card.slide-card.itemmania-card { flex: 0 0 160px; }

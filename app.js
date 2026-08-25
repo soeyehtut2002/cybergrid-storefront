@@ -236,6 +236,18 @@ function setTheme(theme, showNotification = true) {
     }
   }
 
+  const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+  const mobileThemeLabel = document.getElementById('mobile-theme-label');
+  if (mobileThemeIcon && mobileThemeLabel) {
+    if (theme === 'light') {
+      mobileThemeIcon.className = 'fa-solid fa-sun text-orange';
+      mobileThemeLabel.textContent = 'Light Mode ☀️';
+    } else {
+      mobileThemeIcon.className = 'fa-solid fa-moon text-cyan';
+      mobileThemeLabel.textContent = 'Dark Mode 🌙';
+    }
+  }
+
   if (showNotification) {
     showToast(`Switched to ${theme.toUpperCase()} mode 🌓`);
   }
