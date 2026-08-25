@@ -1046,14 +1046,14 @@ function setupEventListeners() {
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
 
-  // Global Ctrl + K search shortcut listener
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      const globalSearchInput = document.getElementById('global-search-input');
-      if (globalSearchInput) {
-        globalSearchInput.focus();
-        globalSearchInput.select();
+  // Global Back-To-Top button scroll listener
+  window.addEventListener('scroll', () => {
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+    if (backToTopBtn) {
+      if (window.scrollY > 200) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
       }
     }
   });

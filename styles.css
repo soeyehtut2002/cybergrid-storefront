@@ -433,8 +433,36 @@ h1, h2, h3, h4, h5, h6 {
 .hero-slide-badge { background: rgba(255, 153, 0, 0.25); border: 1px solid var(--border-orange); color: #fff; padding: 4px 12px; border-radius: var(--radius-full); font-weight: 800; font-size: 0.85rem; }
 .hero-slide-cta { font-size: 0.88rem; padding: 8px 18px; }
 
-.hero-arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(9, 14, 23, 0.7); backdrop-filter: blur(8px); border: 1px solid var(--border-glow); color: var(--primary-cyan); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; z-index: 10; transition: var(--transition-fast); }
-.hero-arrow-btn:hover { background: var(--primary-cyan); color: #000; box-shadow: 0 0 14px rgba(0, 240, 255, 0.5); }
+.hero-arrow-btn { 
+  position: absolute; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  background: rgba(10, 16, 28, 0.85); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(0, 240, 255, 0.35); 
+  color: var(--primary-cyan); 
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  cursor: pointer; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 0.95rem; 
+  z-index: 10; 
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.hero-arrow-btn:hover { 
+  background: linear-gradient(135deg, var(--primary-cyan), #7000ff); 
+  color: #ffffff; 
+  border-color: var(--primary-cyan); 
+  transform: translateY(-50%) scale(1.12); 
+  box-shadow: 0 0 22px rgba(0, 240, 255, 0.65); 
+}
+
 .hero-prev { left: 12px; }
 .hero-next { right: 12px; }
 
@@ -452,8 +480,142 @@ h1, h2, h3, h4, h5, h6 {
 .section-subtitle { color: var(--text-muted); font-size: 0.88rem; }
 
 .slider-controls { display: flex; gap: 8px; }
-.slider-arrow-btn { background: var(--bg-card); border: 1px solid var(--border-glow); color: var(--primary-cyan); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: var(--transition-fast); }
-.slider-arrow-btn:hover { background: var(--primary-cyan); color: #000; box-shadow: 0 0 12px rgba(0, 240, 255, 0.4); }
+.slider-arrow-btn { 
+  background: rgba(10, 16, 28, 0.85); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(0, 240, 255, 0.35); 
+  color: var(--primary-cyan); 
+  width: 38px; 
+  height: 38px; 
+  border-radius: 50%; 
+  cursor: pointer; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 0.95rem; 
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .slider-arrow-btn,
+[data-theme="light"] .hero-arrow-btn {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.18);
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slider-arrow-btn:hover { 
+  background: linear-gradient(135deg, var(--primary-cyan), #7000ff); 
+  color: #ffffff; 
+  border-color: var(--primary-cyan); 
+  transform: scale(1.12); 
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.6); 
+}
+
+/* Floating Cyberpunk Back-To-Top Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(10, 16, 28, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(0, 240, 255, 0.45);
+  color: var(--primary-cyan);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 180;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.25);
+}
+
+[data-theme="light"] .back-to-top-btn {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 110, 220, 0.3);
+  color: #0284c7;
+  box-shadow: 0 6px 20px rgba(0, 40, 90, 0.15);
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.back-to-top-btn:hover {
+  background: linear-gradient(135deg, var(--primary-cyan), #7000ff);
+  color: #ffffff;
+  border-color: var(--primary-cyan);
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.65);
+}
+
+.back-to-top-btn i {
+  font-size: 1.05rem;
+  transition: transform 0.2s ease;
+}
+
+.back-to-top-btn:hover i {
+  transform: translateY(-2px);
+}
+
+.back-to-top-text {
+  font-family: var(--font-heading);
+  font-size: 0.55rem;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  margin-top: 1px;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 240, 255, 0.5);
+  animation: backPulse 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes backPulse {
+  0% { transform: scale(0.95); opacity: 0.85; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* Cyberpunk Modal Back Button */
+.btn-cyber-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--primary-cyan);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-cyber-back:hover {
+  background: rgba(0, 240, 255, 0.16);
+  border-color: var(--primary-cyan);
+  color: #ffffff;
+  transform: translateX(-3px);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+}
 
 .filter-bar { margin-bottom: 16px; }
 .filter-pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
