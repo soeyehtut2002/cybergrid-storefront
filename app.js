@@ -718,9 +718,11 @@ function addToCart(game, pkg, userId, zoneId, ign) {
 
 function updateCartBadge() {
   const countEl = document.getElementById('cart-count');
+  const mobileCountEl = document.getElementById('mobile-cart-count');
   const totalItems = state.cart.length;
 
   if (countEl) countEl.textContent = totalItems;
+  if (mobileCountEl) mobileCountEl.textContent = totalItems;
 }
 
 function renderCartItems() {
