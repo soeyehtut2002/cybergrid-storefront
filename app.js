@@ -192,7 +192,6 @@ let state = {
   recentOrders: JSON.parse(localStorage.getItem('kasaryar_orders')) || [],
   activeCategory: 'all',
   searchTerm: '',
-  currentLang: localStorage.getItem('kasaryar_lang') || 'en',
 
   currentHeroSlide: 0,
   heroAutoplayTimer: null,
@@ -209,101 +208,19 @@ let state = {
   welcomeTimerInterval: null
 };
 
-// INTERNATIONALIZATION (i18n) DICTIONARY
-const TRANSLATIONS = {
-  en: {
-    nav_home: "Home",
-    nav_topup: "Top-Up",
-    nav_payment: "Payment",
-    nav_tracker: "Tracker",
-    nav_support: "Support",
-    nav_cart: "Cart",
-    search_placeholder: "Search game...",
-    browse_title_1: "BROWSE &",
-    browse_title_2: "SELECT GAME",
-    browse_sub: "Select your game to refill instantly with instant 0-sec delivery.",
-    secure_gateways: "100% SECURE GATEWAYS:",
-    cat_all: "All Games",
-    cat_moba: "MOBA",
-    cat_br: "Battle Royale",
-    cat_rpg: "Gacha / RPG",
-    cat_fps: "Tactical FPS",
-    cat_gift: "Gift Cards",
-    lang_btn_text: "မြန်မာဘာသာ",
-    lang_btn_flag: "🇲🇲"
-  },
-  my: {
-    nav_home: "ပင်မစာမျက်နှာ",
-    nav_topup: "ဂိမ်းငွေဖြည့်",
-    nav_payment: "ငွေပေးချေမှု",
-    nav_tracker: "အော်ဒါစစ်မည်",
-    nav_support: "အကူအညီ",
-    nav_cart: "ဈေးဝယ်လှည်း",
-    search_placeholder: "ဂိမ်းအမည် ရှာပါ...",
-    browse_title_1: "ဂိမ်းများ",
-    browse_title_2: "ရွေးချယ်ပါ",
-    browse_sub: "(၀) စက္ကန့်အတွင်း ဂိမ်းငွေ ချက်ချင်း ဖြည့်ယူလိုက်ပါ",
-    secure_gateways: "၁၀၀% စိတ်ချရသော ငွေပေးချေစနစ်များ:",
-    cat_all: "ဂိမ်းအားလုံး",
-    cat_moba: "MOBA ဂိမ်းများ",
-    cat_br: "Battle Royale",
-    cat_rpg: "Gacha / RPG",
-    cat_fps: "Tactical FPS",
-    cat_gift: "Gift Cards",
-    lang_btn_text: "English 🇬🇧",
-    lang_btn_flag: "🇬🇧"
-  }
-};
-
-function initLanguage() {
-  try {
-    const savedLang = localStorage.getItem('kasaryar_lang') || 'en';
-    setLanguage(savedLang, false);
-  } catch (err) {
-    console.error('Error initializing language:', err);
-  }
+function saveCart() {
+  localStorage.setItem('kasaryar_topup_cart', JSON.stringify(state.cart));
+  updateCartBadge();
 }
 
-function setLanguage(lang, showNotification = true) {
-  try {
-    state.currentLang = lang;
-    localStorage.setItem('kasaryar_lang', lang);
-    document.documentElement.setAttribute('lang', lang);
-
-    const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
-
-    // Safely update Mobile Lang Button
-    const mobileLabel = document.getElementById('mobile-lang-label');
-    const mobileFlag = document.getElementById('mobile-lang-flag');
-    if (mobileLabel) mobileLabel.textContent = t.lang_btn_text;
-    if (mobileFlag) mobileFlag.textContent = t.lang_btn_flag;
-
-    // Safely update all data-i18n span text
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      if (!el) return;
-      const key = el.getAttribute('data-i18n');
-      if (key && t[key]) {
-        el.textContent = t[key];
-      }
-    });
-
-    // Safely update Search placeholder
-    const searchInput = document.getElementById('global-search-input');
-    if (searchInput && t.search_placeholder) {
-      searchInput.placeholder = t.search_placeholder;
-    }
-
-    if (showNotification) {
-      showToast(lang === 'my' ? 'မြန်မာဘာသာသို့ ပြောင်းလဲလိုက်ပါပြီ 🇲🇲' : 'Switched to English 🇬🇧', 'success');
-    }
-  } catch (err) {
-    console.error('Error setting language:', err);
-  }
+function saveOrders() {
+  localStorage.setItem('kasaryar_orders', JSON.stringify(state.recentOrders));
 }
 
-function toggleLanguage() {
-  const newLang = state.currentLang === 'en' ? 'my' : 'en';
-  setLanguage(newLang, true);
+// THEME MANAGEMENT (LIGHT & DARK MODE)
+function initTheme() {
+  const savedTheme = localStorage.getItem('kasaryar_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  setTheme(savedTheme, false);
 }
 
 function setTheme(theme, showNotification = true) {
@@ -342,13 +259,11 @@ function toggleTheme() {
   setTheme(newTheme, true);
 }
 
-// Initialize theme & language immediately
+// Initialize theme immediately
 initTheme();
-initLanguage();
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
-  initLanguage();
   renderHeroBanners();
   startHeroBannerAutoplay();
 
@@ -1124,7 +1039,7 @@ function setupEventListeners() {
   const mobileToggleBtn = document.getElementById('mobile-toggle');
   if (mobileToggleBtn) mobileToggleBtn.addEventListener('click', toggleMobileMenu);
 
-  document.querySelectorAll('.nav-link:not(.mobile-theme-link):not(.mobile-lang-link)').forEach(link => {
+  document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
       const navMenu = document.getElementById('nav-menu');
       if (navMenu) navMenu.classList.remove('mobile-active');
