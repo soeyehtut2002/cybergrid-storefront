@@ -100,14 +100,15 @@
       <nav class="nav-menu" id="nav-menu">
         <a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
         <a href="#store" class="nav-link"><i class="fa-solid fa-gem"></i> Top-Up</a>
+        <a href="#deals" class="nav-link"><i class="fa-solid fa-wallet"></i> Payment</a>
         <a href="#" class="nav-link" id="support-btn"><i class="fa-solid fa-headset"></i> Support</a>
         <button class="nav-link mobile-cart-link" id="mobile-cart-btn" onclick="openCartDrawer()">
           <i class="fa-solid fa-cart-shopping text-cyan"></i>
-
+          <span>Cart (<strong id="mobile-cart-count">0</strong>)</span>
         </button>
         <button class="nav-link mobile-theme-link" id="mobile-theme-btn" onclick="toggleTheme()">
           <i class="fa-solid fa-moon text-cyan" id="mobile-theme-icon"></i>
-          <span id="mobile-theme-label">Dark Mode </span>
+          <span id="mobile-theme-label">Dark Mode 🌙</span>
         </button>
       </nav>
 
@@ -200,6 +201,29 @@
       <div class="empty-state" id="empty-state" hidden>
         <i class="fa-solid fa-ghost empty-icon"></i>
         <p>No games matched.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Channels Section -->
+  <section class="features-section" id="deals">
+    <div class="section-container">
+      <div class="feature-banner">
+        <div class="banner-glass">
+          <div class="banner-content">
+            <span class="badge-promo"><i class="fa-solid fa-shield-halved"></i> 100% SECURE</span>
+            <h2>INSTANT 24/7 QR PAYMENT GATEWAYS</h2>
+            <p>Scan QR code with KBZPay, WavePay, AYA Pay, Card, or Crypto for instant direct refill on Kasaryar.</p>
+
+            <div class="payment-badges-row">
+              <div class="pay-chip"><i class="fa-solid fa-wallet text-cyan"></i> KBZPay</div>
+              <div class="pay-chip"><i class="fa-solid fa-mobile-screen-button text-yellow"></i> WavePay</div>
+              <div class="pay-chip"><i class="fa-solid fa-building-columns text-magenta"></i> AYA Pay</div>
+              <div class="pay-chip"><i class="fa-brands fa-cc-visa text-cyan"></i> Visa</div>
+              <div class="pay-chip"><i class="fa-brands fa-bitcoin text-yellow"></i> Crypto</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
