@@ -49,46 +49,55 @@
       <a href="#" class="brand-logo" title="KASARYAR Top-Up Store">
         <svg class="brand-k-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
           <defs>
-            <linearGradient id="kNavyDark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#0e284a" />
-              <stop offset="100%" stop-color="#07172c" />
+            <linearGradient id="hdrCyberCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#0072ff"/>
             </linearGradient>
-            <linearGradient id="kNavyMid" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#143763" />
-              <stop offset="100%" stop-color="#0c2340" />
+            <linearGradient id="hdrCyberMagenta" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff007a"/>
+              <stop offset="100%" stop-color="#7928ca"/>
             </linearGradient>
-            <linearGradient id="kSilverLight" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f1f5f9" />
-              <stop offset="50%" stop-color="#cbd5e1" />
-              <stop offset="100%" stop-color="#94a3b8" />
+            <linearGradient id="hdrCyberDark" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e293b"/>
+              <stop offset="100%" stop-color="#0f172a"/>
             </linearGradient>
-            <linearGradient id="kSilverDark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#94a3b8" />
-              <stop offset="100%" stop-color="#64748b" />
+            <linearGradient id="hdrCyberChrome" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="50%" stop-color="#cbd5e1"/>
+              <stop offset="100%" stop-color="#64748b"/>
             </linearGradient>
+            <filter id="hdrLogoGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
 
-          <!-- Left Upper Wing (Outer Navy + Inner Silver) -->
-          <polygon points="80,100 40,100 40,42" fill="url(#kNavyMid)" />
-          <polygon points="80,100 80,24 40,42" fill="url(#kSilverLight)" />
+          <!-- Outer Cyber Hex Shield Frame -->
+          <polygon points="100,12 175,48 175,138 100,188 25,138 25,48" fill="#080e1a" stroke="url(#hdrCyberCyan)" stroke-width="4" filter="url(#hdrLogoGlow)"/>
+          <polygon points="100,22 165,54 165,132 100,176 35,132 35,54" fill="none" stroke="url(#hdrCyberMagenta)" stroke-width="2.5" opacity="0.8"/>
 
-          <!-- Left Lower Wing (Outer Navy + Inner Silver) -->
-          <polygon points="80,100 40,100 40,158" fill="url(#kNavyMid)" />
-          <polygon points="80,100 80,176 40,158" fill="url(#kSilverDark)" />
+          <!-- 3D Faceted K Emblem -->
+          <!-- Left Vertical Pillar -->
+          <polygon points="50,44 74,44 74,156 50,156" fill="url(#hdrCyberDark)"/>
+          <polygon points="58,44 74,44 74,156 58,156" fill="url(#hdrCyberCyan)"/>
+          <polygon points="50,44 58,44 58,156 50,156" fill="url(#hdrCyberChrome)"/>
 
-          <!-- Main Diagonal Navy Upper Arm -->
-          <polygon points="80,100 144,24 174,24 108,124" fill="url(#kNavyDark)" />
+          <!-- Upper Diagonal Wing -->
+          <polygon points="74,100 135,44 158,44 97,100" fill="url(#hdrCyberDark)"/>
+          <polygon points="97,100 135,44 158,44 120,100" fill="url(#hdrCyberCyan)" filter="url(#hdrLogoGlow)"/>
+          <polygon points="74,100 97,100 158,44 135,44" fill="url(#hdrCyberChrome)"/>
 
-          <!-- Main Diagonal Navy Lower Arm -->
-          <polygon points="80,100 108,76 174,176 144,176" fill="url(#kNavyDark)" />
+          <!-- Lower Diagonal Wing -->
+          <polygon points="74,100 97,100 158,156 135,156" fill="url(#hdrCyberDark)"/>
+          <polygon points="97,100 120,100 158,156 135,156" fill="url(#hdrCyberMagenta)" filter="url(#hdrLogoGlow)"/>
+          <polygon points="74,100 97,100 135,156 112,156" fill="url(#hdrCyberChrome)"/>
 
-          <!-- Inner Silver Upper Fold -->
-          <polygon points="108,124 174,24 177,29 134,118" fill="url(#kSilverLight)" />
-          <polygon points="80,100 108,124 134,118" fill="url(#kSilverLight)" />
-
-          <!-- Inner Silver Lower Fold -->
-          <polygon points="108,76 174,176 177,171 134,82" fill="url(#kSilverDark)" />
-          <polygon points="80,100 108,76 134,82" fill="url(#kSilverLight)" />
+          <!-- Core Energy Gem Node -->
+          <polygon points="100,86 114,100 100,114 86,100" fill="#ffffff" filter="url(#hdrLogoGlow)"/>
+          <polygon points="100,91 109,100 100,109 91,100" fill="#00f0ff"/>
         </svg>
 
         <div class="logo-text">
@@ -234,27 +243,52 @@
       <div class="footer-col footer-brand">
         <a href="#" class="brand-logo" title="KASARYAR Storefront">
           <svg class="brand-k-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-            <!-- Left Upper Wing (Outer Navy + Inner Silver) -->
-            <polygon points="80,100 40,100 40,42" fill="#0c2340" />
-            <polygon points="80,100 80,24 40,42" fill="#cbd5e1" />
+            <defs>
+              <linearGradient id="ftrCyberCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00f0ff"/>
+                <stop offset="100%" stop-color="#0072ff"/>
+              </linearGradient>
+              <linearGradient id="ftrCyberMagenta" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff007a"/>
+                <stop offset="100%" stop-color="#7928ca"/>
+              </linearGradient>
+              <linearGradient id="ftrCyberDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1e293b"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+              <linearGradient id="ftrCyberChrome" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="50%" stop-color="#cbd5e1"/>
+                <stop offset="100%" stop-color="#64748b"/>
+              </linearGradient>
+              <filter id="ftrLogoGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
 
-            <!-- Left Lower Wing (Outer Navy + Inner Silver) -->
-            <polygon points="80,100 40,100 40,158" fill="#0c2340" />
-            <polygon points="80,100 80,176 40,158" fill="#94a3b8" />
+            <!-- Outer Cyber Hex Shield Frame -->
+            <polygon points="100,12 175,48 175,138 100,188 25,138 25,48" fill="#080e1a" stroke="url(#ftrCyberCyan)" stroke-width="4" filter="url(#ftrLogoGlow)"/>
+            <polygon points="100,22 165,54 165,132 100,176 35,132 35,54" fill="none" stroke="url(#ftrCyberMagenta)" stroke-width="2.5" opacity="0.8"/>
 
-            <!-- Main Diagonal Navy Upper Arm -->
-            <polygon points="80,100 144,24 174,24 108,124" fill="#0c2340" />
+            <!-- 3D Faceted K Emblem -->
+            <polygon points="50,44 74,44 74,156 50,156" fill="url(#ftrCyberDark)"/>
+            <polygon points="58,44 74,44 74,156 58,156" fill="url(#ftrCyberCyan)"/>
+            <polygon points="50,44 58,44 58,156 50,156" fill="url(#ftrCyberChrome)"/>
 
-            <!-- Main Diagonal Navy Lower Arm -->
-            <polygon points="80,100 108,76 174,176 144,176" fill="#0c2340" />
+            <polygon points="74,100 135,44 158,44 97,100" fill="url(#ftrCyberDark)"/>
+            <polygon points="97,100 135,44 158,44 120,100" fill="url(#ftrCyberCyan)" filter="url(#ftrLogoGlow)"/>
+            <polygon points="74,100 97,100 158,44 135,44" fill="url(#ftrCyberChrome)"/>
 
-            <!-- Inner Silver Upper Fold -->
-            <polygon points="108,124 174,24 177,29 134,118" fill="#cbd5e1" />
-            <polygon points="80,100 108,124 134,118" fill="#cbd5e1" />
+            <polygon points="74,100 97,100 158,156 135,156" fill="url(#ftrCyberDark)"/>
+            <polygon points="97,100 120,100 158,156 135,156" fill="url(#ftrCyberMagenta)" filter="url(#ftrLogoGlow)"/>
+            <polygon points="74,100 97,100 135,156 112,156" fill="url(#ftrCyberChrome)"/>
 
-            <!-- Inner Silver Lower Fold -->
-            <polygon points="108,76 174,176 177,171 134,82" fill="#94a3b8" />
-            <polygon points="80,100 108,76 134,82" fill="#cbd5e1" />
+            <polygon points="100,86 114,100 100,114 86,100" fill="#ffffff" filter="url(#ftrLogoGlow)"/>
+            <polygon points="100,91 109,100 100,109 91,100" fill="#00f0ff"/>
           </svg>
           <span class="logo-main">KASAR<span class="text-cyan">YAR</span></span>
         </a>
